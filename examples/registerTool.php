@@ -1,6 +1,5 @@
 <?php
 
-
 use WhatsApp\ChatApi\Registration;
 
 $debug = true;

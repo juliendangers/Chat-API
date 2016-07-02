@@ -4,8 +4,6 @@ set_time_limit(30);
 
 use WhatsApp\ChatApi\WhatsProt;
 
-require_once '../src/whatsprot.class.php';
-
 $username = $_GET['phone'];
 $password = $_GET['pass'];
 $u = $_GET['u'];
