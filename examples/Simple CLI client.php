@@ -3,7 +3,11 @@
  * Autor: mgp25                      *
  * Github: https://github.com/mgp25  *
  *************************************/
-require_once '../src/whatsprot.class.php';
+
+use WhatsApp\ChatApi\WhatsProt;
+use WhatsApp\ChatApi\ProtocolNode;
+use WhatsApp\ChatApi\NewMsgBindInterface;
+
 //Change the time zone if you are in a different country
 date_default_timezone_set('Europe/Madrid');
 
@@ -111,7 +115,7 @@ class ProcessNode implements NewMsgBindInterface
         $this->target = $target;
     }
 
-    public function process(\ProtocolNode $node)
+    public function process(ProtocolNode $node)
     {
         $text = $node->getChild('body');
         $text = $text->getData();

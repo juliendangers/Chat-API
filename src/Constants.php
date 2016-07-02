@@ -1,5 +1,7 @@
 <?php
 
+namespace WhatsApp\ChatApi;
+
 class Constants
 {
     /**

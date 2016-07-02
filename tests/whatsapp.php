@@ -1,6 +1,6 @@
 <?php
 
-require __DIR__.'/../src/whatsprot.class.php';
+use WhatsApp\ChatApi\WhatsProt;
 
 function fgets_u($pStdn)
 {

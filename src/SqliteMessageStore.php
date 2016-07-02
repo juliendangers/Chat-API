@@ -1,5 +1,9 @@
 <?php
 
+namespace WhatsApp\ChatApi;
+
+use \PDO as PDO;
+
 interface MessageStoreInterface
 {
     public function saveMessage($from, $to, $txt, $id, $t);

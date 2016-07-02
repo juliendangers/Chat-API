@@ -1,11 +1,15 @@
 <?php
 
+namespace WhatsApp\ChatApi\Events;
+
+use WhatsApp\ChatApi\WhatsProt;
+
 abstract class AllEvents
 {
     protected $eventsToListenFor = [];
     protected $whatsProt;
 
-    public function __construct(\WhatsProt $whatsProt)
+    public function __construct(WhatsProt $whatsProt)
     {
         $this->whatsProt = $whatsProt;
 

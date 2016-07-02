@@ -1,5 +1,7 @@
 <?php
 
+namespace WhatsApp\ChatApi\Events;
+
 class WhatsApiEventsManager
 {
     private $listeners = [];

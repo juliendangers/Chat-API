@@ -1,5 +1,7 @@
 <?php
 
+namespace WhatsApp\ChatApi;
+
 class BinTreeNodeReader
 {
     private $input;
@@ -27,7 +29,7 @@ class BinTreeNodeReader
         $isEncrypted = (0x800000 & $firstByte) > 0;*/
         $stanzaSize = $this->peekInt16(1) | (($firstByte & 0x0F) << 16);
         if ($stanzaSize > strlen($this->input)) {
-            throw new Exception("Incomplete message $stanzaSize != ".strlen($this->input));
+            throw new \Exception("Incomplete message $stanzaSize != ".strlen($this->input));
         }
 
         $head = $this->readInt24();
@@ -39,7 +41,7 @@ class BinTreeNodeReader
                   $this->input = gzuncompress($this->input); // done
                 }
             } else {
-                throw new Exception('Encountered encrypted message, missing key');
+                throw new \Exception('Encountered encrypted message, missing key');
             }
         }
         if ($stanzaSize > 0) {
@@ -83,7 +85,7 @@ class BinTreeNodeReader
                     $string .= chr($decimal - 10 + 45);
                     break;
                 default:
-                    throw new Exception("Bad nibble: $decimal");
+                    throw new \Exception("Bad nibble: $decimal");
             }
         }
 
@@ -99,7 +101,7 @@ class BinTreeNodeReader
             $token = $this->readInt8();
             TokenMap::GetToken($token, $subdict, $ret);
             if (!$ret) {
-                throw new Exception("BinTreeNodeReader->getToken: Invalid token/length in getToken $token");
+                throw new \Exception("BinTreeNodeReader->getToken: Invalid token/length in getToken $token");
             }
         }
 
@@ -113,7 +115,7 @@ class BinTreeNodeReader
         $subdict = true;
         TokenMap::GetToken($pos, $subdict, $ret);
         if (!$ret) {
-            throw new Exception("BinTreeNodeReader->getToken: Invalid token $pos($n + $n * 256)");
+            throw new \Exception("BinTreeNodeReader->getToken: Invalid token $pos($n + $n * 256)");
         }
 
         return $ret;
@@ -123,7 +125,7 @@ class BinTreeNodeReader
     {
         $ret = '';
         if ($token == -1) {
-            throw new Exception("BinTreeNodeReader->readString: Invalid -1 token in readString $token");
+            throw new \Exception("BinTreeNodeReader->readString: Invalid -1 token in readString $token");
         }
 
         if (($token > 2) && ($token < 236)) {
@@ -171,7 +173,7 @@ class BinTreeNodeReader
                     return $this->fillArray($len); //maybe ut8 decode
                 }
                 default:
-                    throw new Exception("readString couldn't match token ".$token);
+                    throw new \Exception("readString couldn't match token ".$token);
             }
         }
     }
@@ -208,7 +210,7 @@ class BinTreeNodeReader
             case 255:
                 return $this->unpackNibble($n2);
             default:
-                throw new Exception('bad packed type ' + $n);
+                throw new \Exception('bad packed type ' . $n);
         }
     }
 
@@ -234,7 +236,7 @@ class BinTreeNodeReader
             case 15:
                 return 65 + ($n - 10);
             default:
-                throw new Exception('bad hex '.$n);
+                throw new \Exception('bad hex '.$n);
         }
     }
 
@@ -256,7 +258,7 @@ class BinTreeNodeReader
             case 11:
                 return 45 + ($n - 10);
             default:
-                throw new Exception('bad nibble '.$n);
+                throw new \Exception('bad nibble '.$n);
         }
     }
 
@@ -293,7 +295,7 @@ class BinTreeNodeReader
 
         $tag = $this->readString($token);
         if ($size == 0 || $size == null) {
-            throw new Exception('nextTree sees 0 list or null tag');
+            throw new \Exception('nextTree sees 0 list or null tag');
         }
         $attributes = $this->readAttributes($size);
         if ($size % 2 == 1) {
@@ -356,7 +358,7 @@ class BinTreeNodeReader
             return $this->readInt16();
         }
 
-        throw new Exception("BinTreeNodeReader->readListSize: invalid list size in readListSize: token $token");
+        throw new \Exception("BinTreeNodeReader->readListSize: invalid list size in readListSize: token $token");
     }
 
     protected function peekInt24($offset = 0)

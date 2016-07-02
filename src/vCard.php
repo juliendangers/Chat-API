@@ -1,4 +1,7 @@
 <?php
+
+namespace WhatsApp\ChatApi;
+
 /**
  * @file
  * A class to generate vCards for contact data.

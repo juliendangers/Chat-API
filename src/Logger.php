@@ -1,5 +1,7 @@
 <?php
 
+namespace WhatsApp\ChatApi;
+
 class Logger
 {
     protected $logfile;
@@ -8,11 +10,11 @@ class Logger
     {
         if (!file_exists($logfile)) {
             if (!touch($logfile)) {
-                throw new Exception('Log file '.$logfile.' cannot be created');
+                throw new \Exception('Log file '.$logfile.' cannot be created');
             }
         }
         if (!is_writable($logfile)) {
-            throw new Exception('Log file '.$logfile.' is not writeable');
+            throw new \Exception('Log file '.$logfile.' is not writeable');
         }
         $this->logfile = $logfile;
     }

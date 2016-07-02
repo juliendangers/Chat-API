@@ -1,8 +1,11 @@
 <?php
 
+namespace WhatsApp\ChatApi;
+
 require_once __DIR__.'/func.php';
 require_once __DIR__.'/libaxolotl-php/protocol/SenderKeyDistributionMessage.php';
 require_once __DIR__.'/libaxolotl-php/ecc/Curve.php';
+
 class SenderKeyGroupMessage extends \ProtobufMessage
 {
     const GROUP_ID = 1;

@@ -67,7 +67,8 @@ $config['YOURNAME'] = [
 /**
  * NOTHING ELSE TO EDIT BELOW THIS LINE.
  */
-require '../src/whatsprot.class.php';
+
+use WhatsApp\ChatApi\WhatsProt;
 
 /**
  * For the future, other ways of getting contacts from various sources
@@ -378,7 +379,7 @@ class Whatsapp
 
         $myinputs = filter_input_array(INPUT_POST, $args);
         if (!$myinputs) {
-            throw Exception('Problem Filtering the inputs');
+            throw \Exception('Problem Filtering the inputs');
         }
 
         return $myinputs;
@@ -675,9 +676,6 @@ class Whatsapp
             if (isset($this->inputs['video']) && $this->inputs['video'] !== false) {
                 $this->wa->sendBroadcastVideo($this->inputs['to'], $this->inputs['video']);
             }
-            if (isset($this->inputs['locationname']) && trim($this->inputs['locationname'] !== '')) {
-                $this->wa->sendBroadcastPlace($this->inputs['to'], $this->inputs['userlong'], $this->inputs['userlat'], $this->inputs['locationname'], null);
-            }
             exit(json_encode([
                 'success'  => true,
                 'data'     => 'Broadcast Message Sent!',
@@ -697,8 +695,7 @@ class Whatsapp
             $_SESSION['logged_in'] = true;
             exit($this->showWebForm());
         } else {
-            $error = 'Sorry your password was incorrect.';
-            exit($this->showWebLoginForm($error));
+            exit($this->showWebLoginForm());
         }
     }
 

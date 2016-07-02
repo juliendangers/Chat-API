@@ -1,6 +1,6 @@
 <?php
 
-require_once '../src/whatsprot.class.php';
+use WhatsApp\ChatApi\WhatsProt;
 
 $debug = false;
 

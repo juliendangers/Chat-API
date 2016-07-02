@@ -1,5 +1,9 @@
 <?php
 
+namespace WhatsApp\ChatApi;
+
+use WhatsApp\ChatApi\Exceptions\LoginFailureException;
+
 class Login
 {
     protected $phoneNumber;
@@ -19,7 +23,7 @@ class Login
   /**
    * Send the nodes to the WhatsApp server to log in.
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function doLogin()
   {

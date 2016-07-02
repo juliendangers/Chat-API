@@ -1,14 +1,22 @@
 <?php
 
-require_once 'Handler.php';
+namespace WhatsApp\ChatApi\Handlers;
+
+use WhatsApp\ChatApi\WhatsProt;
+use WhatsApp\ChatApi\ProtocolNode;
+use WhatsApp\ChatApi\Constants;
+use WhatsApp\ChatApi\ImageMessage;
+use WhatsApp\ChatApi\Location;
+use WhatsApp\ChatApi\MediaUrl;
+use WhatsApp\ChatApi\DocumentMessage;
+
 if (extension_loaded('curve25519') && extension_loaded('protobuf')) {
     require_once __DIR__.'/../libaxolotl-php/protocol/SenderKeyDistributionMessage.php';
     require_once __DIR__.'/../libaxolotl-php/groups/GroupSessionBuilder.php';
     require_once __DIR__.'/../pb_wa_messages.php';
     require_once __DIR__.'/../libaxolotl-php/UntrustedIdentityException.php';
 }
-require_once __DIR__.'/../protocol.class.php';
-require_once __DIR__.'/../Constants.php';
+
 require_once __DIR__.'/../func.php';
 
 class MessageHandler implements Handler
@@ -17,7 +25,7 @@ class MessageHandler implements Handler
     protected $parent;
     protected $phoneNumber;
 
-    public function __construct(\WhatsProt $parent, \ProtocolNode $node)
+    public function __construct(WhatsProt $parent, ProtocolNode $node)
     {
         $this->node = $node;
         $this->parent = $parent;
@@ -566,10 +574,10 @@ class MessageHandler implements Handler
                              $senderKeyGroupMessage = new SenderKeyGroupData();
                              try {
                                  $senderKeyGroupMessage->parseFromString($senderKeyBytes);
-                             } catch (Exception $ex) {
+                             } catch (\Exception $ex) {
                                  try {
                                      $senderKeyGroupMessage->parseFromString(substr($senderKeyBytes, 0, -1));
-                                 } catch (Exception $ex) {
+                                 } catch (\Exception $ex) {
                                      return $node;
                                  }
                              }
@@ -638,7 +646,7 @@ class MessageHandler implements Handler
                 $this->parent->debugPrint(parseText($plaintext)."\n\n");
 
                 return $plaintext;
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
                 if ($e instanceof UntrustedIdentityException) {
                     $this->parent->getAxolotlStore()->clearRecipient(ExtractNumber($from));
                 }
@@ -673,7 +681,7 @@ class MessageHandler implements Handler
             $this->parent->debugPrint(parseText($plaintext)."\n\n");
 
             return $plaintext;
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->parent->debugPrint($e->getMessage().' - '.$e->getFile().' - '.$e->getLine());
             $this->parent->debugPrint("Message $id could not be decrypted, sending retry.\n\n");
             if ($retry_from != null) {
@@ -695,7 +703,7 @@ class MessageHandler implements Handler
             $this->parent->debugPrint("Message $id decrypted to ".parseText($plaintext)."\n\n");
 
             return $plaintext;
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->parent->debugPrint($e->getMessage().' - '.$e->getFile().' - '.$e->getLine());
             if ($retry_from != null) {
                 $from = $retry_from;

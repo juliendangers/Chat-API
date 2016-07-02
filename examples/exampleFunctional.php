@@ -1,8 +1,11 @@
 <?php
 
 set_time_limit(10);
-require_once __DIR__.'/../src/whatsprot.class.php';
-require_once __DIR__.'/../src//events/MyEvents.php';
+
+use WhatsApp\ChatApi\WhatsProt;
+use WhatsApp\ChatApi\ProtocolNode;
+use WhatsApp\ChatApi\NewMsgBindInterface;
+use WhatsApp\ChatApi\Constants;
 
 //Change to your time zone
 date_default_timezone_set('Europe/Madrid');
@@ -158,7 +161,7 @@ class ProcessNode implements NewMsgBindInterface
     /**
      * @param ProtocolNode $node
      */
-    public function process(\ProtocolNode $node)
+    public function process(ProtocolNode $node)
     {
         // Example of process function, you have to guess a number (psss it's 5)
         // If you guess it right you get a gift

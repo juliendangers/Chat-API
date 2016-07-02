@@ -1,5 +1,7 @@
 <?php
 
+namespace WhatsApp\ChatApi;
+
 class BinTreeNodeWriter
 {
     private $output;
@@ -201,7 +203,7 @@ class BinTreeNodeWriter
         if ($token <= 255 && $token >= 0) {
             $this->output .= chr($token);
         } else {
-            throw new Exception('Invalid token.');
+            throw new \Exception('Invalid token.');
         }
          /*elseif ($token <= 0x1f4) {
             $this->output .= "\xfe" . chr($token - 0xf5);

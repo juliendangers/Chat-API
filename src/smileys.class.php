@@ -1,5 +1,7 @@
 <?php
 
+namespace WhatsApp\ChatApi;
+
 /**
  * A class that stores the 845 smileys of WhatsApp.
  *
@@ -13,7 +15,7 @@
  * http://www.typografie.info/3/page/artikel.htm/_/wissen/unicode-emoji-deutsch
  * http://appamatix.com/843-whatsapp-emoticons-meanings-emoji-list/
  */
-class SmileyNotFoundException extends Exception
+class SmileyNotFoundException extends \Exception
 {
 };
 
@@ -22,7 +24,7 @@ class Smileys
     private $listSmileys = [
         'SMILING_FACE_WITH_OPEN_MOUTH_AND_SMILING_EYES'                      => 0x1F604, // Smiley 1
         'SMILING_FACE_WITH_OPEN_MOUTH'                                       => 0x1F603, // Smiley 2
-        'GRINNING_FACE_WITH_SMILING_EYES'                                    => 0x1F600, // Smiley 3
+        'GRINNING_FACE'                                                      => 0x1F600, // Smiley 3
         'SMILING_FACE_WITH_SMILING_EYES'                                     => 0x1F60A, // Smiley 4
         'WHITE_SMILING_FACE'                                                 => 0x263A,  // Smiley 5
         'WINKING_FACE'                                                       => 0x1F609, // Smiley 6
@@ -481,7 +483,6 @@ class Smileys
         'BASKETBALL_AND_HOOP'                                                => 0x1F3C0, // Smiley 459
         'SOCCER_BALL'                                                        => 0x26BD,  // Smiley 460
         'BASEBALL'                                                           => 0x26BE,  // Smiley 461
-        'GREEN_BOOK'                                                         => 0x1F4D7, // Smiley 462
         'TENNIS_RACQUET_AND_BALL'                                            => 0x1F3BE, // Smiley 463
         'BILLIARDS'                                                          => 0x1F3B1, // Smiley 464
         'RUGBY_FOOTBALL'                                                     => 0x1F3C9, // Smiley 465

@@ -1,25 +1,14 @@
 <?php
 
-require_once 'protocol.class.php';
-require_once 'BinTreeNodeReader.php';
-require_once 'BinTreeNodeWriter.php';
-require_once 'Login.php';
-require_once 'Logger.php';
-require_once 'Constants.php';
-require_once 'func.php';
-require_once 'token.php';
-require_once 'rc4.php';
-require_once 'mediauploader.php';
-require_once 'keystream.class.php';
-require_once 'tokenmap.class.php';
-require_once 'events/WhatsApiEventsManager.php';
-require_once 'SqliteMessageStore.php';
-require_once 'SqliteAxolotlStore.php';
-require_once 'handlers/NotificationHandler.php';
-require_once 'handlers/MessageHandler.php';
-require_once 'handlers/IqHandler.php';
+namespace WhatsApp\ChatApi;
+
+use WhatsApp\ChatApi\Exceptions\ConnectionException;
+use WhatsApp\ChatApi\Events\WhatsApiEventsManager;
+use WhatsApp\ChatApi\Handlers\MessageHandler;
+use WhatsApp\ChatApi\Handlers\NotificationHandler;
+use WhatsApp\ChatApi\Handlers\IqHandler;
+
 if (extension_loaded('curve25519') && extension_loaded('protobuf')) {
-    require_once 'pb_wa_messages.php';
     require_once 'libaxolotl-php/util/KeyHelper.php';
     require_once 'libaxolotl-php/ecc/Curve.php';
     require_once 'libaxolotl-php/state/PreKeyRecord.php';
@@ -131,7 +120,7 @@ class WhatsProt
                     'logs'.DIRECTORY_SEPARATOR.$number.'.log');
         }
 
-        $this->setAxolotlStore(new axolotlSqliteStore($number, $this->dataFolder));
+        $this->setAxolotlStore(new AxolotlSqliteStore($number, $this->dataFolder));
 
         $this->name = $nickname;
         $this->loginStatus = Constants::DISCONNECTED_STATUS;
@@ -290,7 +279,7 @@ class WhatsProt
     /**
      * Fetch a single message node.
      *
-     * @throws Exception
+     * @throws \Exception
      *
      * @return bool
      */
@@ -344,7 +333,7 @@ class WhatsProt
 
     public function sendSetPreKeys($new = false)
     {
-        $axolotl = new KeyHelper();
+        $axolotl = new \KeyHelper();
 
         $identityKeyPair = $axolotl->generateIdentityKeyPair();
         $privateKey = $identityKeyPair->getPrivateKey()->serialize();
@@ -1305,7 +1294,7 @@ class WhatsProt
                 }
                 $cipherText = $sessionCipher->encrypt($alteredText);
 
-                if ($cipherText instanceof WhisperMessage) {
+                if ($cipherText instanceof \WhisperMessage) {
                     $type = 'msg';
                 } else {
                     $type = 'pkmsg';
@@ -1984,7 +1973,7 @@ class WhatsProt
         $this->messageStore = $messageStore;
     }
 
-    public function setAxolotlStore(axolotlInterface $axolotlStore)
+    public function setAxolotlStore(AxolotlInterface $axolotlStore)
     {
         $this->axolotlStore = $axolotlStore;
     }
@@ -2072,7 +2061,7 @@ class WhatsProt
      *
      * @param   $data
      *
-     * @throws Exception
+     * @throws \Exception
      */
     protected function processInboundData($data)
     {
@@ -2104,9 +2093,8 @@ class WhatsProt
      * This also provides a convenient method to use to unit test the event framework.
      *
      * @param ProtocolNode $node
-     * @param              $type
      *
-     * @throws Exception
+     * @throws \Exception
      */
     protected function processInboundDataNode(ProtocolNode $node)
     {
@@ -2354,7 +2342,7 @@ class WhatsProt
 
                         break;
                     default:
-                        throw new Exception('ib handler for '.$child->getTag().' not implemented');
+                        throw new \Exception('ib handler for '.$child->getTag().' not implemented');
                 }
             }
         }
@@ -2378,6 +2366,7 @@ class WhatsProt
     /**
      * @param $node  ProtocolNode
      * @param $class string
+     * @param $isGroup bool
      */
     public function sendAck($node, $class, $isGroup = false)
     {
@@ -2599,7 +2588,7 @@ class WhatsProt
     /**
      * Read 1024 bytes from the whatsapp server.
      *
-     * @throws Exception
+     * @throws \Exception
      */
     public function readStanza()
     {
@@ -2897,7 +2886,7 @@ class WhatsProt
     {
         $listNode = null;
         $idNode = $id;
-        if (is_array($id) && count($id > 1)) {
+        if (is_array($id) && count($id) > 1) {
             $idNode = array_shift($id);
             foreach ($id as $itemId) {
                 $items[] = new ProtocolNode('item',
@@ -3039,7 +3028,7 @@ class WhatsProt
     public function getSessionCipher($number)
     {
         if (!isset($this->sessionCiphers[$number])) {
-            $this->sessionCiphers[$number] = new SessionCipher($this->axolotlStore, $this->axolotlStore, $this->axolotlStore, $this->axolotlStore, $number, 1);
+            $this->sessionCiphers[$number] = new \SessionCipher($this->axolotlStore, $this->axolotlStore, $this->axolotlStore, $this->axolotlStore, $number, 1);
         }
 
         return $this->sessionCiphers[$number];
@@ -3053,7 +3042,7 @@ class WhatsProt
     public function getGroupCipher($groupId)
     {
         if (!isset($this->groupCiphers[$groupId])) {
-            $this->groupCiphers[$groupId] = new GroupCipher($this->axolotlStore, $groupId);
+            $this->groupCiphers[$groupId] = new \GroupCipher($this->axolotlStore, $groupId);
         }
 
         return $this->groupCiphers[$groupId];
@@ -3140,7 +3129,7 @@ class WhatsProt
     }
 
     /**
-     * @return \axolotlInterface
+     * @return AxolotlInterface
      */
     public function getAxolotlStore()
     {

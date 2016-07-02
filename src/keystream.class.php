@@ -1,4 +1,7 @@
 <?php
+
+namespace WhatsApp\ChatApi;
+
 /**
  * Created by JetBrains PhpStorm.
  * User: max
@@ -51,7 +54,7 @@ class KeyStream
             $foo = ord($buffer[$macOffset + $i]);
             $bar = ord($mac[$i]);
             if ($foo !== $bar) {
-                throw new Exception("MAC mismatch: $foo != $bar");
+                throw new \Exception("MAC mismatch: $foo != $bar");
             }
         }
 

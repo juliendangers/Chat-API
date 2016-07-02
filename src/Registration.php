@@ -1,8 +1,9 @@
 <?php
 
-require_once 'events/WhatsApiEventsManager.php';
-require_once 'Constants.php';
-require_once 'token.php';
+namespace WhatsApp\ChatApi;
+
+use WhatsApp\ChatApi\Events\WhatsApiEventsManager;
+
 require_once 'func.php';
 
 class Registration
@@ -27,7 +28,7 @@ class Registration
    *       Make sure you update your config file if the output informs about
    *       a password change.
    *
-   * @throws Exception
+   * @throws \Exception
    *
    * @return object
    *   An object with server response.
@@ -45,7 +46,7 @@ class Registration
   public function checkCredentials()
   {
       if (!$phone = $this->dissectPhone()) {
-          throw new Exception('The provided phone number is not valid.');
+          throw new \Exception('The provided phone number is not valid.');
       }
 
       $countryCode = ($phone['ISO3166'] != '') ? $phone['ISO3166'] : 'US';
@@ -86,7 +87,7 @@ class Registration
           $this->debugPrint($query);
           $this->debugPrint($response);
 
-          throw new Exception('There was a problem trying to request the code.');
+          throw new \Exception('There was a problem trying to request the code.');
       } else {
           $this->eventManager()->fire('onCredentialsGood',
             [
@@ -112,7 +113,7 @@ class Registration
    * @param int $code
    *   Numeric code value provided on requestCode().
    *
-   * @throws Exception
+   * @throws \Exception
    *
    * @return object
    *   An object with server response.
@@ -130,7 +131,7 @@ class Registration
   public function codeRegister($code)
   {
       if (!$phone = $this->dissectPhone()) {
-          throw new Exception('The provided phone number is not valid.');
+          throw new \Exception('The provided phone number is not valid.');
       }
 
       $code = str_replace('-', '', $code);
@@ -178,7 +179,7 @@ class Registration
               $this->update();
           }
 
-          throw new Exception("An error occurred registering the registration code from WhatsApp. Reason: $response->reason");
+          throw new \Exception("An error occurred registering the registration code from WhatsApp. Reason: $response->reason");
       } else {
           $this->eventManager()->fire('onCodeRegister',
             [
@@ -204,7 +205,7 @@ class Registration
    * @param string $method Accepts only 'sms' or 'voice' as a value.
    * @param string $carrier
    *
-   * @throws Exception
+   * @throws \Exception
    *
    * @return object
    *   An object with server response.
@@ -218,7 +219,7 @@ class Registration
   public function codeRequest($method = 'sms', $carrier = 'T-Mobile5', $platform = 'Android')
   {
       if (!$phone = $this->dissectPhone()) {
-          throw new Exception('The provided phone number is not valid.');
+          throw new \Exception('The provided phone number is not valid.');
       }
 
       $countryCode = ($phone['ISO3166'] != '') ? $phone['ISO3166'] : 'US';
@@ -292,7 +293,7 @@ class Registration
                     $response->retry_after,
                 ]);
               $minutes = round($response->retry_after / 60);
-              throw new Exception("Code already sent. Retry after $minutes minutes.");
+              throw new \Exception("Code already sent. Retry after $minutes minutes.");
           } elseif (isset($response->reason) && $response->reason == 'too_many_guesses') {
               $this->eventManager()->fire('onCodeRequestFailedTooManyGuesses',
                 [
@@ -302,7 +303,7 @@ class Registration
                     $response->retry_after,
                 ]);
               $minutes = round($response->retry_after / 60);
-              throw new Exception("Too many guesses. Retry after $minutes minutes.");
+              throw new \Exception("Too many guesses. Retry after $minutes minutes.");
           } else {
               $this->eventManager()->fire('onCodeRequestFailed',
                 [
@@ -311,7 +312,7 @@ class Registration
                     $response->reason,
                     isset($response->param) ? $response->param : null,
                 ]);
-              throw new Exception('There was a problem trying to request the code.');
+              throw new \Exception('There was a problem trying to request the code.');
           }
       } else {
           $this->eventManager()->fire('onCodeRequest',
@@ -472,7 +473,7 @@ class Registration
    *
    * @param  mixed $identity_file IdentityFile (optional).
    *
-   * @throws Exception        Error when cannot write identity data to file.
+   * @throws \Exception        Error when cannot write identity data to file.
    *
    * @return string           Correctly formatted identity
    */
@@ -494,7 +495,7 @@ class Registration
       $bytes = strtolower(openssl_random_pseudo_bytes(20));
 
       if (file_put_contents($identity_file, urlencode($bytes)) === false) {
-          throw new Exception('Unable to write identity file to '.$identity_file);
+          throw new \Exception('Unable to write identity file to '.$identity_file);
       }
 
       return $bytes;

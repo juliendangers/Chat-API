@@ -1,6 +1,9 @@
 <?php
 
-require_once 'Handler.php';
+namespace WhatsApp\ChatApi\Handlers;
+
+use WhatsApp\ChatApi\WhatsProt;
+use WhatsApp\ChatApi\ProtocolNode;
 
 class NotificationHandler implements Handler
 {
@@ -9,7 +12,7 @@ class NotificationHandler implements Handler
     protected $parent;
     protected $phoneNumber;
 
-    public function __construct(\WhatsProt $parent, \ProtocolNode $node)
+    public function __construct(WhatsProt $parent, ProtocolNode $node)
     {
         $this->node = $node;
         $this->type = $node->getAttribute('type');
@@ -210,7 +213,7 @@ class NotificationHandler implements Handler
               }
             break;
         default:
-            throw new Exception("Method $this->type not implemented");
+            throw new \Exception("Method $this->type not implemented");
     }
         $this->parent->sendAck($this->node, 'notification');
     }

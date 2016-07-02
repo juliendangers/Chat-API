@@ -1,13 +1,16 @@
 <?php
 
-require_once 'Handler.php';
+namespace WhatsApp\ChatApi\Handlers;
+
 if (extension_loaded('curve25519') && extension_loaded('protobuf')) {
     require_once __DIR__.'/../libaxolotl-php/protocol/SenderKeyDistributionMessage.php';
     require_once __DIR__.'/../libaxolotl-php/groups/GroupSessionBuilder.php';
-    require_once __DIR__.'/../pb_wa_messages.php';
 }
-require_once __DIR__.'/../protocol.class.php';
-require_once __DIR__.'/../Constants.php';
+
+use WhatsApp\ChatApi\WhatsProt;
+use WhatsApp\ChatApi\ProtocolNode;
+use WhatsApp\ChatApi\Constants;
+
 require_once __DIR__.'/../func.php';
 
 class IqHandler implements Handler
@@ -16,7 +19,7 @@ class IqHandler implements Handler
     protected $parent;
     protected $phoneNumber;
 
-    public function __construct(\WhatsProt $parent, \ProtocolNode $node)
+    public function __construct(WhatsProt $parent, ProtocolNode $node)
     {
         $this->node = $node;
         $this->parent = $parent;
@@ -258,9 +261,9 @@ class IqHandler implements Handler
             foreach ($users as $user) {
                 $jid = $user->getAttribute('jid');
                 $registrationId = deAdjustId($user->getChild('registration')->getData());
-                $identityKey = new  IdentityKey(new DjbECPublicKey($user->getChild('identity')->getData()));
+                $identityKey = new  \IdentityKey(new \DjbECPublicKey($user->getChild('identity')->getData()));
                 $signedPreKeyId = deAdjustId($user->getChild('skey')->getChild('id')->getData());
-                $signedPreKeyPub = new DjbECPublicKey($user->getChild('skey')->getChild('value')->getData());
+                $signedPreKeyPub = new \DjbECPublicKey($user->getChild('skey')->getChild('value')->getData());
                 $signedPreKeySig = $user->getChild('skey')->getChild('signature')->getData();
                 
                 $preKeyId = null;
@@ -268,11 +271,11 @@ class IqHandler implements Handler
                 if(!is_null($user->getChild('key'))){
                     //SupportsV3 only
                     $preKeyId = deAdjustId($user->getChild('key')->getChild('id')->getData());
-                    $preKeyPublic = new DjbECPublicKey($user->getChild('key')->getChild('value')->getData());
+                    $preKeyPublic = new \DjbECPublicKey($user->getChild('key')->getChild('value')->getData());
                 }
                 
-                $preKeyBundle = new PreKeyBundle($registrationId, 1, $preKeyId, $preKeyPublic, $signedPreKeyId, $signedPreKeyPub, $signedPreKeySig, $identityKey);
-                $sessionBuilder = new SessionBuilder($this->parent->getAxolotlStore(), $this->parent->getAxolotlStore(), $this->parent->getAxolotlStore(), $this->parent->getAxolotlStore(), ExtractNumber($jid), 1);
+                $preKeyBundle = new \PreKeyBundle($registrationId, 1, $preKeyId, $preKeyPublic, $signedPreKeyId, $signedPreKeyPub, $signedPreKeySig, $identityKey);
+                $sessionBuilder = new \SessionBuilder($this->parent->getAxolotlStore(), $this->parent->getAxolotlStore(), $this->parent->getAxolotlStore(), $this->parent->getAxolotlStore(), ExtractNumber($jid), 1);
 
                 $sessionBuilder->processPreKeyBundle($preKeyBundle);
                 if (isset($this->parent->getPendingNodes()[ExtractNumber($jid)])) {

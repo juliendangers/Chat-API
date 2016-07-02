@@ -4,9 +4,12 @@
  * Github: https://github.com/mgp25  *
  *************************************/
 
- // ################ CONFIG PATHS #####################
- require_once '../../src/whatsprot.class.php';
- require '../../src//events/MyEvents.php';
+use WhatsApp\ChatApi\WhatsProt;
+use WhatsApp\ChatApi\NewMsgBindInterface;
+use WhatsApp\ChatApi\Events\MyEvents;
+use WhatsApp\ChatApi\SqliteMessageStore;
+use WhatsApp\ChatApi\ProtocolNode;
+
  // ###################################################
 
  // ############## CONFIG TIMEZONE ###################
@@ -32,7 +35,7 @@ $fileName = __DIR__.DIRECTORY_SEPARATOR.'data.db';
 $contactsDB = __DIR__.DIRECTORY_SEPARATOR.'contacts.db';
 if (isset($argv[1])) {
     if (!file_exists($fileName)) {
-        $db = new \PDO('sqlite:'.$fileName, null, null, [PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+        $db = new PDO('sqlite:'.$fileName, null, null, [PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
         $db->exec('CREATE TABLE data (`username` TEXT, `password` TEXT, `nickname` TEXT, `login` TEXT)');
         $sql = 'INSERT INTO data (`username`, `password`, `nickname`, `login`) VALUES (:username, :password, :nickname, :login)';
         $query = $db->prepare($sql);
@@ -96,7 +99,7 @@ if ((!file_exists($fileName))) {
     );
 }
 
-$db = new \PDO('sqlite:'.$fileName, null, null, [PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+$db = new PDO('sqlite:'.$fileName, null, null, [PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
 $sql = 'SELECT username, password, nickname, login FROM data';
 $row = $db->query($sql);
 $result = $row->fetchAll();
@@ -188,7 +191,7 @@ do {
         $w->sendSync([], [$numberToRemove], 3);
         $w->sendPresenceUnsubscription($numberToRemove);
         $contactsDB = __DIR__.DIRECTORY_SEPARATOR.'contacts.db';
-        $cDB = new \PDO('sqlite:'.$contactsDB, null, null, [PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+        $cDB = new PDO('sqlite:'.$contactsDB, null, null, [PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
         $sql = 'DELETE FROM contacts WHERE nickname = :nickname';
         $query = $cDB->prepare($sql);
         $query->execute([':nickname' => $nickname]);
@@ -673,7 +676,7 @@ class ProcessNode implements NewMsgBindInterface
         $this->target = $target;
     }
 
-    public function process(\ProtocolNode $node)
+    public function process(ProtocolNode $node)
     {
         if ($node->getAttribute('type') == 'text') {
             $text = $node->getChild('body');

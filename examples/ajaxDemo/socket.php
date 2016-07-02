@@ -1,5 +1,7 @@
 <?php
 
+use WhatsApp\ChatApi\WhatsProt;
+
 set_time_limit(60); //1 minute
 session_start();
 session_write_close();

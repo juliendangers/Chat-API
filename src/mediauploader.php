@@ -1,4 +1,7 @@
 <?php
+
+namespace WhatsApp\ChatApi;
+
 /**
  * Media uploader class.
  */

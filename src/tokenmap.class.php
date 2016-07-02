@@ -1,5 +1,7 @@
 <?php
 
+namespace WhatsApp\ChatApi;
+
 class TokenMap
 {
     private static $primaryStrings = [
@@ -545,7 +547,7 @@ class TokenMap
 
         $string = $tokenMap[$token];
         if (!$string) {
-            throw new Exception('Invalid token/length in GetToken');
+            throw new \Exception('Invalid token/length in GetToken');
         }
     }
 }
