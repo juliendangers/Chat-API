@@ -1,7 +1,5 @@
 <?php
 
-namespace WhatsApp\ChatApi;
-
 require_once 'func.php';
 
 function generateRequestToken($country, $phone, $platform)

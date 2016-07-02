@@ -4,7 +4,7 @@ namespace WhatsApp\ChatApi;
 
 use WhatsApp\ChatApi\Events\WhatsApiEventsManager;
 
-require_once 'func.php';
+require_once 'token.php';
 
 class Registration
 {
