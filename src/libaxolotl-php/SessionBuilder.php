@@ -240,7 +240,7 @@ class SessionBuilder
             $builder->setOurIdentityKey($sessionRecord->getSessionState()->getPendingKeyExchangeIdentityKey())
                 ->setOurBaseKey($sessionRecord->getSessionState()->getPendingKeyExchangeBaseKey())
                 ->setOurRatchetKey($sessionRecord->getSessionState()->getPendingKeyExchangeRatchetKey());
-            $flags |= KeyExchangeMessage::SIMULTAENOUS_INITIATE_FLAG;
+            $flags |= KeyExchangeMessage::SIMULTANEOUS_INITIATE_FLAG;
         }
 
         $builder->setTheirBaseKey($keyExchangeMessage->getBaseKey())
