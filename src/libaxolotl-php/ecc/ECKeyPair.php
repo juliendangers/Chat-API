@@ -1,5 +1,7 @@
 <?php
 
+namespace LibAxolotl\Ecc;
+
 class ECKeyPair
 {
     protected $publicKey;    // ECPublicKey

@@ -1,5 +1,7 @@
 <?php
 
+namespace LibAxolotl\Utils;
+
 class ByteUtil
 {
     public static function combine($elements) // [byte[]... elements]

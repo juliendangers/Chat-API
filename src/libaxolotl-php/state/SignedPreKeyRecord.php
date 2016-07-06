@@ -1,16 +1,20 @@
 <?php
 
-require_once __DIR__.'/../InvalidKeyException.php';
-require_once __DIR__.'/../ecc/Curve.php';
-require_once __DIR__.'/../ecc/ECKeyPair.php';
-require_once __DIR__.'/../ecc/ECPrivateKey.php';
-require_once __DIR__.'/../ecc/ECPublicKey.php';
-require_once __DIR__.'/../state/pb_proto_LocalStorageProtocol.php';
+namespace LibAxolotl\State;
+
+use LibAxolotl\Ecc\Curve;
+use LibAxolotl\Ecc\ECKeyPair;
+use LibAxolotl\Ecc\ECPublicKey;
+use LibAxolotl\Ecc\ECPrivateKey;
+
+use LibAxolotl\Exceptions\InvalidKeyException;
+use \Exception as Exception;
+
 class SignedPreKeyRecord
 {
     protected $structure;
 
-    public function SignedPreKeyRecord($id = null, $timestamp = null, $keyPair = null, $signature = null, $serialized = null) // [int id, long timestamp, ECKeyPair keyPair, byte[] signature]
+    public function SignedPreKeyRecord($id = null, $timestamp = null, ECKeyPair $keyPair = null, $signature = null, $serialized = null) // [int id, long timestamp, ECKeyPair keyPair, byte[] signature]
     {
         $struct = new Textsecure_SignedPreKeyRecordStructure();
         if ($serialized == null) {
@@ -38,7 +42,9 @@ class SignedPreKeyRecord
     public function getKeyPair()
     {
         try {
+            /** @var ECPublicKey $publicKey */
             $publicKey = Curve::decodePoint($this->structure->getPublicKey(), 0);
+            /** @var ECPrivateKey $privateKey */
             $privateKey = Curve::decodePrivatePoint($this->structure->getPrivateKey());
 
             return  new ECKeyPair($publicKey, $privateKey);

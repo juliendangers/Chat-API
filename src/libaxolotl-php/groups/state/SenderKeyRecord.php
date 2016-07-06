@@ -1,8 +1,10 @@
 <?php
 
-require_once __DIR__.'/../../state/pb_proto_LocalStorageProtocol.php';
-require_once __DIR__.'/SenderKeyState.php';
-require_once __DIR__.'/../../InvalidKeyIdException.php';
+namespace LibAxolotl\Groups\State;
+
+use LibAxolotl\State\TextSecure_SenderKeyRecordStructure;
+
+use LibAxolotl\Exceptions\InvalidKeyIdException;
 
 class SenderKeyRecord
 {

@@ -1,6 +1,8 @@
 <?php
 
-class InvalidMessageException extends Exception
+namespace LibAxolotl\Exceptions;
+
+class InvalidMessageException extends \Exception
 {
     public function InvalidMessageException($detailMessage, $throw = null) // [String detailMessage]
     {

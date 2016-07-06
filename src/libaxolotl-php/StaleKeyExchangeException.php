@@ -1,5 +1,7 @@
 <?php
 
-class StaleKeyExchangeException extends Exception
+namespace LibAxolotl\Exceptions;
+
+class StaleKeyExchangeException extends \Exception
 {
 }

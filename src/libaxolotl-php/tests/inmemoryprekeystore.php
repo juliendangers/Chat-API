@@ -1,13 +1,12 @@
 <?php
 
+namespace LibAxolotl\Tests;
 
-//from axolotl.state.prekeystore import PreKeyStore
-//from axolotl.state.prekeyrecord import PreKeyRecord
-//from axolotl.invalidkeyidexception import InvalidKeyIdException
-require_once __DIR__.'/../state/PreKeyStore.php';
-require_once __DIR__.'/../state/PreKeyRecord.php';
-require_once __DIR__.'/../InvalidKeyIdException.php';
-class inmemoryprekeystore extends PreKeyStore
+use LibAxolotl\State\PreKeyRecord;
+use LibAxolotl\State\PreKeyStore;
+use LibAxolotl\Exceptions\InvalidKeyIdException;
+
+class InMemoryPreKeyStore extends PreKeyStore
 {
     protected $store;
 
@@ -25,7 +24,7 @@ class inmemoryprekeystore extends PreKeyStore
         return new PreKeyRecord(null, null, $this->store[$preKeyId]);
     }
 
-    public function storePreKey($preKeyId, $preKeyRecord)
+    public function storePreKey($preKeyId, PreKeyRecord $preKeyRecord)
     {
         $this->store[$preKeyId] = $preKeyRecord->serialize();
     }

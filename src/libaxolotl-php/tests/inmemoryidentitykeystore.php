@@ -1,16 +1,14 @@
 <?php
 
+namespace LibAxolotl\Tests;
 
-//from axolotl.state.identitykeystore import IdentityKeyStore
-//from axolotl.ecc.curve import Curve
-//from axolotl.identitykey import IdentityKey
-//from axolotl.util.keyhelper import KeyHelper
-//from axolotl.identitykeypair import IdentityKeyPair
-require_once __DIR__.'/../state/IdentityKeyStore.php';
-require_once __DIR__.'/../ecc/Curve.php';
-require_once __DIR__.'/../util/KeyHelper.php';
-require_once __DIR__.'/../IdentityKeyPair.php';
-class inmemoryidentitykeystore extends IdentityKeyStore
+use LibAxolotl\Ecc\Curve;
+use LibAxolotl\IdentityKey;
+use LibAxolotl\IdentityKeyPair;
+use LibAxolotl\State\IdentityKeyStore;
+use LibAxolotl\Utils\KeyHelper;
+
+class InMemoryIdentityKeyStore extends IdentityKeyStore
 {
     protected $trustedKeys;
     protected $identityKeyPair;
@@ -35,12 +33,12 @@ class inmemoryidentitykeystore extends IdentityKeyStore
         return $this->localRegistrationId;
     }
 
-    public function saveIdentity($recepientId, $identityKey)
+    public function saveIdentity($recepientId, IdentityKey $identityKey)
     {
         $this->trustedKeys[$recepientId] = $identityKey;
     }
 
-    public function isTrustedIdentity($recepientId, $identityKey)
+    public function isTrustedIdentity($recepientId, IdentityKey $identityKey)
     {
         if (!isset($this->trustedKeys[$recepientId])) {
             return true;

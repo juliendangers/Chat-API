@@ -1,6 +1,10 @@
 <?php
 
-require_once __DIR__.'/../kdf/DerivedRootSecrets.php';
+namespace LibAxolotl\Ratchet;
+
+use LibAxolotl\Ecc\Curve;
+use LibAxolotl\Kdf\DerivedRootSecrets;
+
 class RootKey
 {
     protected $kdf;

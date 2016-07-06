@@ -1,11 +1,13 @@
 <?php
 
-require_once __DIR__.'/Medium.php';
-require_once __DIR__.'/../ecc/Curve.php';
-require_once __DIR__.'/../IdentityKey.php';
-require_once __DIR__.'/../IdentityKeyPair.php';
-require_once __DIR__.'/../state/PreKeyRecord.php';
-require_once __DIR__.'/../state/SignedPreKeyRecord.php';
+namespace LibAxolotl\Utils;
+
+use LibAxolotl\Ecc\Curve;
+use LibAxolotl\IdentityKeyPair;
+use LibAxolotl\IdentityKey;
+
+use LibAxolotl\State\PreKeyRecord;
+use LibAxolotl\State\SignedPreKeyRecord;
 
 class KeyHelper
 {

@@ -5,6 +5,8 @@
  * textsecure package
  */
 
+namespace LibAxolotl\Protocol;
+
 /**
  * WhisperMessage message.
  */

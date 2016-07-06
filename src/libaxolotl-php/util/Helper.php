@@ -1,5 +1,7 @@
 <?php
 
+namespace LibAxolotl\Utils;
+
 class Helper
 {
     public static function checkNotNull($reference, $message = null)
@@ -9,7 +11,7 @@ class Helper
         }
 
         if ($reference === null) {
-            throw new Exception($message);
+            throw new \Exception($message);
         }
 
         return $reference;

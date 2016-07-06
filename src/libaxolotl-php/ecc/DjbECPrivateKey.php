@@ -1,5 +1,7 @@
 <?php
 
+namespace LibAxolotl\Ecc;
+
 class DjbECPrivateKey implements ECPrivateKey
 {
     protected $privateKey;    // byte[] --> php string now

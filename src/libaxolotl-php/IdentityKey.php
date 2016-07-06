@@ -1,12 +1,23 @@
 <?php
 
-require_once __DIR__.'/ecc/Curve.php';
-require_once __DIR__.'/ecc/ECPublicKey.php';
+namespace LibAxolotl;
+
+use LibAxolotl\Ecc\Curve;
+use LibAxolotl\Ecc\ECPublicKey;
+
 class IdentityKey
 {
-    protected $publicKey;    // ECPublicKey
+    /**
+     * @var ECPublicKey $publicKey
+     */
+    protected $publicKey;
 
-    public function IdentityKey($publicKeyOrBytes, $offset = null) // [ECPublicKey publicKey]
+    /**
+     * @param ECPublicKey $publicKeyOrBytes
+     * @param int $offset
+     * @throws Exceptions\InvalidKeyException
+     */
+    public function IdentityKey($publicKeyOrBytes, $offset = null)
     {
         if ($offset === null) {
             $this->publicKey = $publicKeyOrBytes;

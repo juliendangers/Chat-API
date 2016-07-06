@@ -1,18 +1,30 @@
 <?php
 
-require_once __DIR__.'/../IdentityKey.php';
-require_once __DIR__.'/../IdentityKeyPair.php';
+namespace LibAxolotl\State;
+
+use LibAxolotl\IdentityKey;
+use LibAxolotl\IdentityKeyPair;
+
 abstract class IdentityKeyStore
 {
+    /**
+     * @return IdentityKeyPair
+     */
     abstract public function getIdentityKeyPair();
 
     abstract public function getLocalRegistrationId();
 
-    abstract public function saveIdentity($recipientId, $identityKey);
+    /**
+     * @param int $recipientId
+     * @param IdentityKey $identityKey
+     * @return void
+     */
+    abstract public function saveIdentity($recipientId, IdentityKey $identityKey);
 
- // [long recipientId, IdentityKey identityKey]
-
-    abstract public function isTrustedIdentity($recipientId, $identityKey);
-
- // [long recipientId, IdentityKey identityKey]
+    /**
+     * @param int $recipientId
+     * @param IdentityKey $identityKey
+     * @return bool
+     */
+    abstract public function isTrustedIdentity($recipientId, IdentityKey $identityKey);
 }

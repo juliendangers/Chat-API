@@ -1,18 +1,31 @@
 <?php
 
-//require_once("com/google/protobuf/ByteString.php");
-require_once __DIR__.'/../ecc/ECPublicKey.php';
-require_once __DIR__.'/../util/ByteUtil.php';
-require_once __DIR__.'/pb_proto_WhisperTextProtocol.php';
-require_once __DIR__.'/CiphertextMessage.php';
-require_once __DIR__.'/../InvalidMessageException.php';
-require_once __DIR__.'/../LegacyMessageException.php';
+namespace LibAxolotl\Protocol;
+
+use LibAxolotl\Utils\ByteUtil;
+
+use LibAxolotl\Ecc\Curve;
+use LibAxolotl\Ecc\ECPublicKey;
+
+use LibAxolotl\Exceptions\InvalidMessageException;
+use LibAxolotl\Exceptions\LegacyMessageException;
+use \Exception as Exception;
+
 class SenderKeyDistributionMessage extends CiphertextMessage
 {
-    protected $id;    // int
-    protected $iteration;    // int
+    /**
+     * @var int $id
+     */
+    protected $id;
+    /**
+     * @var int $iteration
+     */
+    protected $iteration;
     protected $chainKey;    // byte[]
-    protected $signatureKey;    // ECPublicKey
+    /**
+     * @var ECPublicKey $signatureKey
+     */
+    protected $signatureKey;
     protected $serialized;    // byte[]
 
     public function SenderKeyDistributionMessage($id = null, $iteration = null, $chainKey = null, $signatureKey = null, $serialized = null) // [int id, int iteration, byte[] chainKey, ECPublicKey signatureKey]
@@ -35,10 +48,10 @@ class SenderKeyDistributionMessage extends CiphertextMessage
             $version = ord($parts[0][0]);
             $message = $parts[1];
             if (ByteUtil::highBitsToInt($version) < self::CURRENT_VERSION) {
-                throw new LegacyMessageException('Legacy message: ' + ByteUtil::highBitsToInt($version));
+                throw new LegacyMessageException('Legacy message: ' . ByteUtil::highBitsToInt($version));
             }
             if (ByteUtil::highBitsToInt($version) > self::CURRENT_VERSION) {
-                throw new InvalidMessageException('Unknown version: ' + ByteUtil::highBitsToInt($version));
+                throw new InvalidMessageException('Unknown version: ' . ByteUtil::highBitsToInt($version));
             }
             $proto_skdm = new Textsecure_SenderKeyDistributionMessage();
             try {

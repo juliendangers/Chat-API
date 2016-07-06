@@ -1,5 +1,7 @@
 <?php
 
+namespace LibAxolotl\Ecc;
+
 interface ECPrivateKey
 {
     public function serialize();

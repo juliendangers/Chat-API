@@ -1,17 +1,39 @@
 <?php
 
-require_once __DIR__.'/../IdentityKey.php';
-require_once __DIR__.'/../IdentityKeyPair.php';
-require_once __DIR__.'/../ecc/ECKeyPair.php';
-require_once __DIR__.'/../ecc/ECPublicKey.php';
+namespace LibAxolotl\Ratchet;
+
+use LibAxolotl\Ecc\ECKeyPair;
+use LibAxolotl\Ecc\ECPublicKey;
+use LibAxolotl\IdentityKey;
+use LibAxolotl\IdentityKeyPair;
+use \Exception as Exception;
+
 class AliceAxolotlParameters
 {
-    protected $ourIdentityKey;    // IdentityKeyPair
-    protected $ourBaseKey;    // ECKeyPair
-    protected $theirIdentityKey;    // IdentityKey
-    protected $theirSignedPreKey;    // ECPublicKey
-    protected $theirOneTimePreKey;    // Optional<ECPublicKey>
-    protected $theirRatchetKey;    // ECPublicKey
+    /**
+     * @var IdentityKeyPair $ourIdentityKey
+     */
+    protected $ourIdentityKey;
+    /**
+     * @var ECKeyPair $ourBaseKey
+     */
+    protected $ourBaseKey;
+    /**
+     * @var IdentityKey $theirIdentityKey
+     */
+    protected $theirIdentityKey;
+    /**
+     * @var ECPublicKey $theirSignedPreKey
+     */
+    protected $theirSignedPreKey;
+    /**
+     * @var ECPublicKey $theirOneTimePreKey optional
+     */
+    protected $theirOneTimePreKey;
+    /**
+     * @var ECPublicKey $theirRatchetKey
+     */
+    protected $theirRatchetKey;
 
     public function AliceAxolotlParameters($ourIdentityKey, $ourBaseKey, $theirIdentityKey, $theirSignedPreKey, $theirRatchetKey, $theirOneTimePreKey) // [IdentityKeyPair ourIdentityKey, ECKeyPair ourBaseKey, IdentityKey theirIdentityKey, ECPublicKey theirSignedPreKey, ECPublicKey theirRatchetKey, Optional<ECPublicKey> theirOneTimePreKey]
     {
@@ -62,6 +84,7 @@ class AliceAxolotlParameters
         return $this->theirRatchetKey;
     }
 }
+
 class AliceBuilder
 {
     protected $ourIdentityKey;
@@ -126,6 +149,6 @@ class AliceBuilder
     public function create()
     {
         return new AliceAxolotlParameters($this->ourIdentityKey, $this->ourBaseKey, $this->theirIdentityKey,
-                                      $this->theirSignedPreKey, $this->theirRatchetKey, $this->theirOneTimePreKey);
+            $this->theirSignedPreKey, $this->theirRatchetKey, $this->theirOneTimePreKey);
     }
 }

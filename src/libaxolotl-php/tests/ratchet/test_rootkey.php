@@ -1,10 +1,14 @@
 <?php
 
-require_once __DIR__.'/../../ecc/Curve.php';
-require_once __DIR__.'/../../ratchet/RootKey.php';
-require_once __DIR__.'/../../kdf/HKDF.php';
-require_once __DIR__.'/../../ratchet/ChainKey.php';
-class RootKeyTest extends PHPUnit_Framework_TestCase
+namespace LibAxolotl\Tests\Ratchet;
+
+use LibAxolotl\Ecc\Curve;
+use LibAxolotl\Ecc\ECKeyPair;
+
+use LibAxolotl\Kdf\HKDF;
+use LibAxolotl\Ratchet\RootKey;
+
+class RootKeyTest extends \PHPUnit_Framework_TestCase
 {
     public function testRootKeyDerivationV2()
     {

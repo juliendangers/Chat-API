@@ -1,9 +1,11 @@
 <?php
 
-require_once __DIR__.'/../../ratchet/ChainKey.php';
-require_once __DIR__.'/../../kdf/HKDF.php';
+namespace LibAxolotl\Tests\Ratchet;
 
-class ChainKeyTest extends PHPUnit_Framework_TestCase
+use LibAxolotl\Kdf\HKDF;
+use LibAxolotl\Ratchet\ChainKey;
+
+class ChainKeyTest extends \PHPUnit_Framework_TestCase
 {
     public function test_chainKeyDerivationV2()
     {

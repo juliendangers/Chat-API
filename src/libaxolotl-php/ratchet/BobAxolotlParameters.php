@@ -1,9 +1,9 @@
 <?php
 
-require_once __DIR__.'/../IdentityKey.php';
-require_once __DIR__.'/../IdentityKeyPair.php';
-require_once __DIR__.'/../ecc/ECKeyPair.php';
-require_once __DIR__.'/../ecc/ECPublicKey.php';
+namespace LibAxolotl\Ratchet;
+
+use \Exception as Exception;
+
 class BobAxolotlParameters
 {
     protected $ourIdentityKey;
@@ -65,6 +65,7 @@ class BobAxolotlParameters
         return $this->ourOneTimePreKey;
     }
 }
+
 class BobBuilder
 {
     protected $ourIdentityKey;
@@ -129,7 +130,7 @@ class BobBuilder
     public function create()
     {
         return new BobAxolotlParameters($this->ourIdentityKey, $this->ourSignedPreKey, $this->ourRatchetKey, $this->ourOneTimePreKey,
-                                        $this->theirIdentityKey,
-                                        $this->theirBaseKey);
+            $this->theirIdentityKey,
+            $this->theirBaseKey);
     }
 }

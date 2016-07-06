@@ -1,11 +1,12 @@
 <?php
 
+namespace LibAxolotl\Tests;
 
-//from axolotl.state.signedprekeystore import SignedPreKeyStore
-//from axolotl.state.signedprekeyrecord import SignedPreKeyRecord
-//from axolotl.invalidkeyidexception import InvalidKeyIdException
+use LibAxolotl\State\SignedPreKeyRecord;
+use LibAxolotl\State\SignedPreKeyStore;
+use LibAxolotl\Exceptions\InvalidKeyIdException;
 
-class inmemorysignedprekeystore extends SignedPreKeyStore
+class InMemorySignedPreKeyStore extends SignedPreKeyStore
 {
     protected $store;
 

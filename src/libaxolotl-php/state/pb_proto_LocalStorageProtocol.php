@@ -5,6 +5,8 @@
  * textsecure package
  */
 
+namespace LibAxolotl\State;
+
 /**
  * ChainKey message embedded in Chain/SessionStructure message.
  */

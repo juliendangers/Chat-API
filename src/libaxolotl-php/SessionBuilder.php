@@ -1,28 +1,39 @@
 <?php
 
-require_once __DIR__.'/ecc/Curve.php';
-require_once __DIR__.'/ecc/ECKeyPair.php';
-require_once __DIR__.'/ecc/ECPublicKey.php';
-require_once __DIR__.'/logging/Log.php';
-require_once __DIR__.'/protocol/CiphertextMessage.php';
-require_once __DIR__.'/protocol/KeyExchangeMessage.php';
-require_once __DIR__.'/protocol/PreKeyWhisperMessage.php';
-require_once __DIR__.'/ratchet/AliceAxolotlParameters.php';
-require_once __DIR__.'/ratchet/BobAxolotlParameters.php';
-require_once __DIR__.'/ratchet/RatchetingSession.php';
-require_once __DIR__.'/ratchet/SymmetricAxolotlParameters.php';
-require_once __DIR__.'/state/AxolotlStore.php';
-require_once __DIR__.'/state/IdentityKeyStore.php';
-require_once __DIR__.'/state/PreKeyBundle.php';
-require_once __DIR__.'/state/PreKeyStore.php';
-require_once __DIR__.'/state/SessionRecord.php';
-require_once __DIR__.'/state/SessionState.php';
-require_once __DIR__.'/state/SessionStore.php';
-require_once __DIR__.'/state/SignedPreKeyStore.php';
-require_once __DIR__.'/util/KeyHelper.php';
-require_once __DIR__.'/util/Medium.php';
-require_once __DIR__.'/StaleKeyExchangeException.php';
-require_once __DIR__.'/UntrustedIdentityException.php';
+namespace LibAxolotl;
+
+use LibAxolotl\Ecc\Curve;
+use LibAxolotl\Ecc\ECPublicKey;
+use LibAxolotl\Ecc\ECKeyPair;
+
+use LibAxolotl\Logger\Log;
+
+use LibAxolotl\Protocol\CiphertextMessage;
+use LibAxolotl\Protocol\KeyExchangeMessage;
+use LibAxolotl\Protocol\PreKeyWhisperMessage;
+
+use LibAxolotl\Ratchet\AliceBuilder;
+use LibAxolotl\Ratchet\BobBuilder;
+use LibAxolotl\Ratchet\RatchetingSession;
+use LibAxolotl\Ratchet\SymmetricBuilder;
+
+use LibAxolotl\State\AxolotlStore;
+use LibAxolotl\State\IdentityKeyStore;
+use LibAxolotl\State\PreKeyBundle;
+use LibAxolotl\State\PreKeyStore;
+use LibAxolotl\State\SessionRecord;
+use LibAxolotl\State\SessionState;
+use LibAxolotl\State\SessionStore;
+use LibAxolotl\State\SignedPreKeyStore;
+
+use LibAxolotl\Utils\KeyHelper;
+use LibAxolotl\Utils\Medium;
+use LibAxolotl\Exceptions\StaleKeyExchangeException;
+use LibAxolotl\Exceptions\UntrustedIdentityException;
+use LibAxolotl\Exceptions\InvalidKeyIdException;
+use LibAxolotl\Exceptions\InvalidKeyException;
+use \Exception as Exception;
+
 class SessionBuilder
 {
     protected $sessionStore;
@@ -42,21 +53,15 @@ class SessionBuilder
         $this->deviceId = $deviceId;
     }
 
-    public function process($sessionRecord, $message)
+    public function process(SessionRecord $sessionRecord, PreKeyWhisperMessage $message)
     {
-        /*
-        :param sessionRecord:
-        :param message:
-        :type message: PreKeyWhisperMessage
-        */
-
         $messageVersion = $message->getMessageVersion();
         $theirIdentityKey = $message->getIdentityKey();
 
         $unsignedPreKeyId = null;
 
         if (!$this->identityKeyStore->isTrustedIdentity($this->recipientId, $theirIdentityKey)) {
-            throw new  UntrustedIdentityException('Untrusted identity!!');
+            throw new UntrustedIdentityException('Untrusted identity!!');
         }
         if ($messageVersion == 2) {
             $unsignedPreKeyId = $this->processV2($sessionRecord, $message);
@@ -71,13 +76,8 @@ class SessionBuilder
         return $unsignedPreKeyId;
     }
 
-    public function processV2($sessionRecord, $message)
+    public function processV2(SessionRecord $sessionRecord, PreKeyWhisperMessage $message)
     {
-        /*
-        :type sessionRecord: SessionRecord
-        :type message: PreKeyWhisperMessage
-        */
-
         if ($message->getPreKeyId() == null) {
             throw new InvalidKeyIdException('V2 message requires one time prekey id!');
         }
@@ -116,14 +116,8 @@ class SessionBuilder
         }
     }
 
-    public function processV3($sessionRecord, $message)
+    public function processV3(SessionRecord $sessionRecord, PreKeyWhisperMessage $message)
     {
-        /*
-        :param sessionRecord:
-        :param message:
-        :type message: PreKeyWhisperMessage
-        :return:
-        */
         if ($sessionRecord->hasSessionState($message->getMessageVersion(), $message->getBaseKey()->serialize())) {
             Log::warn('v3', "We've already setup a session for this V3 message, letting bundled message fall through...");
 
@@ -160,11 +154,8 @@ class SessionBuilder
         }
     }
 
-    public function processPreKeyBundle($preKey)
+    public function processPreKeyBundle(PreKeyBundle $preKey)
     {
-        /*
-        :type preKey: PreKeyBundle
-        */
         if (!$this->identityKeyStore->isTrustedIdentity($this->recipientId, $preKey->getIdentityKey())) {
             throw new  UntrustedIdentityException();
         }

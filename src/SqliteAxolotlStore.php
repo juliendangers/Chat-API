@@ -2,6 +2,15 @@
 
 namespace WhatsApp\ChatApi;
 
+use LibAxolotl\Groups\State\SenderKeyRecord;
+use LibAxolotl\State\PreKeyRecord;
+use LibAxolotl\State\SessionRecord;
+use LibAxolotl\State\SignedPreKeyRecord;
+use LibAxolotl\IdentityKeyPair;
+use LibAxolotl\IdentityKey;
+use LibAxolotl\Ecc\DjbECPublicKey;
+use LibAxolotl\Ecc\DjbECPrivateKey;
+
 use \PDO as PDO;
 
 interface AxolotlInterface
@@ -180,7 +189,7 @@ class AxolotlSqliteStore implements AxolotlInterface
             throw new \Exception('No such prekey with id: '.$preKeyId);
         }
 
-        return new \PreKeyRecord(null, null, $row['record']);
+        return new PreKeyRecord(null, null, $row['record']);
     }
 
     public function loadPreKeys()
@@ -252,7 +261,7 @@ class AxolotlSqliteStore implements AxolotlInterface
             throw new \Exception('No such signedprekey with id: '.$signedPreKeyId);
         }
 
-        return new \SignedPreKeyRecord(null, null, null, null, $row['record']);
+        return new SignedPreKeyRecord(null, null, null, null, $row['record']);
     }
 
     public function loadSignedPreKeys()
@@ -264,7 +273,7 @@ class AxolotlSqliteStore implements AxolotlInterface
         $keys = [];
         while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
             if ($row != null && $row !== false) {
-                $keys[] = new \SignedPreKeyRecord(null, null, null, null, $row['record']);
+                $keys[] = new SignedPreKeyRecord(null, null, null, null, $row['record']);
             }
         }
 
@@ -324,9 +333,9 @@ class AxolotlSqliteStore implements AxolotlInterface
         $row = $query->fetch(PDO::FETCH_ASSOC);
 
         if ($row != null && $row !== false) {
-            $keys = new \IdentityKeyPair(
-                                      new \IdentityKey(new \DjbECPublicKey(substr($row['public_key'], 1))),
-                                      new \DjbECPrivateKey($row['private_key'])
+            $keys = new IdentityKeyPair(
+                                      new IdentityKey(new DjbECPublicKey(substr($row['public_key'], 1))),
+                                      new DjbECPrivateKey($row['private_key'])
                                    );
         } else {
 
@@ -449,9 +458,9 @@ class AxolotlSqliteStore implements AxolotlInterface
         $row = $query->fetch(PDO::FETCH_ASSOC);
 
         if ($row != null && $row !== false) {
-            $SessionRecord = new \SessionRecord(null, $row['record']);
+            $SessionRecord = new SessionRecord(null, $row['record']);
         } else {
-            $SessionRecord = new \SessionRecord();
+            $SessionRecord = new SessionRecord();
         }
 
         return $SessionRecord;
@@ -571,9 +580,9 @@ class AxolotlSqliteStore implements AxolotlInterface
           ]
       );
         $row = $query->fetch(PDO::FETCH_ASSOC);
-        $record = new \SenderKeyRecord();
+        $record = new SenderKeyRecord();
         if ($row != null && $row !== false) {
-            $record = new \SenderKeyRecord($row['record']);
+            $record = new SenderKeyRecord($row['record']);
         }
 
         return $record;

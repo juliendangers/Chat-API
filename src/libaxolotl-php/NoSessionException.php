@@ -1,6 +1,8 @@
 <?php
 
-class NoSessionException extends Exception
+namespace LibAxolotl\Exceptions;
+
+class NoSessionException extends \Exception
 {
     public function NoSessionException($s) // [String s]
     {

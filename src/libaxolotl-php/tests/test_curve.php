@@ -1,7 +1,11 @@
 <?php
 
-require_once __DIR__.'/../ecc/Curve.php';
-class Curve25519Test extends PHPUnit_Framework_TestCase
+namespace LibAxolotl\Tests;
+
+use LibAxolotl\Ecc\Curve;
+use \Exception as Exception;
+
+class Curve25519Test extends \PHPUnit_Framework_TestCase
 {
     public function testAgreement()
     {

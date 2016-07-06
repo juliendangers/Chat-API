@@ -1,5 +1,7 @@
 <?php
 
+namespace LibAxolotl\Logger;
+
 class AxolotlLoggerProvider
 {
     protected static $provider;    // AxolotlLogger

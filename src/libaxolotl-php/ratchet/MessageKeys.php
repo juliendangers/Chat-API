@@ -1,5 +1,7 @@
 <?php
 
+namespace LibAxolotl\Ratchet;
+
 class MessageKeys
 {
     protected $cipherKey;    // SecretKeySpec

@@ -1,6 +1,8 @@
 <?php
 
-class InvalidVersionException extends Exception
+namespace LibAxolotl\Exceptions;
+
+class InvalidVersionException extends \Exception
 {
     public function InvalidVersionException($detailMessage) // [String detailMessage]
     {

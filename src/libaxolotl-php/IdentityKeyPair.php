@@ -1,13 +1,19 @@
 <?php
 
-require_once __DIR__.'/state/pb_proto_LocalStorageProtocol.php';
-require_once __DIR__.'/IdentityKey.php';
+namespace LibAxolotl;
+
+use LibAxolotl\Ecc\Curve;
+use LibAxolotl\Ecc\ECPrivateKey;
+use LibAxolotl\State\Textsecure_IdentityKeyPairStructure;
+
 class IdentityKeyPair
 {
-    protected $publicKey;    // IdentityKey
-    protected $privateKey;    // ECPrivateKey
+    /** @var IdentityKey $publicKey */
+    protected $publicKey;
+    /** @var ECPrivateKey $privateKey */
+    protected $privateKey;
 
-    public function IdentityKeyPair($publicKey = null, $privateKey = null, $serialized = null) // [IdentityKey publicKey, ECPrivateKey privateKey]
+    public function IdentityKeyPair(IdentityKey $publicKey = null, ECPrivateKey $privateKey = null, $serialized = null)
     {
         if ($serialized == null) {
             $this->publicKey = $publicKey;

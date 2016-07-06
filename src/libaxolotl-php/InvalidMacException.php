@@ -1,6 +1,8 @@
 <?php
 
-class InvalidMacException extends Exception
+namespace LibAxolotl\Exceptions;
+
+class InvalidMacException extends \Exception
 {
     public function InvalidMacException($detailMessage) // [String detailMessage]
     {

@@ -1,5 +1,7 @@
 <?php
 
+namespace LibAxolotl\Protocol;
+
 abstract class CiphertextMessage
 {
     const UNSUPPORTED_VERSION = 1;

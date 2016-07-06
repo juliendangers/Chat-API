@@ -1,6 +1,7 @@
 <?php
 
-require_once __DIR__.'/IdentityKeyStore.php';
+namespace LibAxolotl\State;
+
 abstract class AxolotlStore extends IdentityKeyStore
 {
 }

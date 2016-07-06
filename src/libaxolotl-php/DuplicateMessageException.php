@@ -1,6 +1,8 @@
 <?php
 
-class DuplicateMessageException extends Exception
+namespace LibAxolotl\Exceptions;
+
+class DuplicateMessageException extends \Exception
 {
     public function DuplicateMessageException($s) // [String s]
     {

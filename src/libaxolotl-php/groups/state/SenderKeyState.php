@@ -1,9 +1,16 @@
 <?php
 
-require_once __DIR__.'/../../state/pb_proto_LocalStorageProtocol.php';
-require_once __DIR__.'/../ratchet/SenderChainKey.php';
-require_once __DIR__.'/../ratchet/SenderMessageKey.php';
-require_once __DIR__.'/../../ecc/Curve.php';
+namespace LibAxolotl\Groups\State;
+
+use LibAxolotl\Ecc\Curve;
+
+use LibAxolotl\Groups\Ratchet\SenderMessageKey;
+use LibAxolotl\Groups\Ratchet\SenderChainKey;
+
+use LibAxolotl\State\Textsecure_SenderKeyStateStructure;
+use LibAxolotl\State\Textsecure_SenderKeyStateStructure_SenderChainKey;
+use LibAxolotl\State\Textsecure_SenderKeyStateStructure_SenderSigningKey;
+use LibAxolotl\State\Textsecure_SenderKeyStateStructure_SenderMessageKey;
 
 class SenderKeyState
 {

@@ -1,5 +1,7 @@
 <?php
 
+namespace LibAxolotl\State;
+
 abstract class SessionStore
 {
     abstract public function loadSession($recipientId, $deviceId);

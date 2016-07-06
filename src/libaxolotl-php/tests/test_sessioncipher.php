@@ -1,36 +1,21 @@
 <?php
 
-/*import unittest
-from axolotl.state.sessionrecord import SessionRecord
-from axolotl.ecc.curve import Curve
-from axolotl.identitykeypair import IdentityKeyPair, IdentityKey
-from axolotl.ratchet.aliceaxolotlparameters import AliceAxolotlParameters
-from axolotl.ratchet.bobaxolotlparamaters import BobAxolotlParameters
-from axolotl.ratchet.ratchetingsession import RatchetingSession
-from axolotl.tests.inmemoryaxolotlstore import InMemoryAxolotlStore
-from axolotl.sessioncipher import SessionCipher
-from axolotl.protocol.whispermessage import WhisperMessage
-import time
-from random import shuffle*/
-require_once __DIR__.'/../ecc/Curve.php';
-require_once __DIR__.'/../ratchet/RootKey.php';
-require_once __DIR__.'/../kdf/HKDF.php';
-require_once __DIR__.'/../ratchet/ChainKey.php';
-require_once __DIR__.'/../IdentityKey.php';
-require_once __DIR__.'/../IdentityKeyPair.php';
-require_once __DIR__.'/../ratchet/AliceAxolotlParameters.php';
-require_once __DIR__.'/../ratchet/BobAxolotlParameters.php';
-require_once __DIR__.'/../state/SessionState.php';
-require_once __DIR__.'/../state/SessionRecord.php';
-require_once __DIR__.'/../ratchet/RatchetingSession.php';
-require_once __DIR__.'/../state/SignedPreKeyStore.php';
-require_once __DIR__.'/../SessionCipher.php';
-require_once __DIR__.'/../SessionBuilder.php';
-require_once __DIR__.'/inmemoryidentitykeystore.php';
-require_once __DIR__.'/inmemorysessionstore.php';
-require_once __DIR__.'/inmemorysignedprekeystore.php';
+namespace LibAxolotl\Tests;
 
-require_once __DIR__.'/inmemoryaxolotlstore.php';
+use LibAxolotl\Ecc\Curve;
+
+use LibAxolotl\Protocol\WhisperMessage;
+
+use LibAxolotl\Ratchet\AliceAxolotlParameters;
+use LibAxolotl\Ratchet\BobAxolotlParameters;
+use LibAxolotl\Ratchet\RatchetingSession;
+
+use LibAxolotl\State\SessionRecord;
+
+use LibAxolotl\SessionCipher;
+use LibAxolotl\IdentityKeyPair;
+use LibAxolotl\IdentityKey;
+
 function parseText($txt)
 {
     for ($x = 0; $x < strlen($txt); $x++) {
@@ -66,7 +51,7 @@ function niceVarDump($obj, $ident = 0)
                 }
                 $k = hex2bin($k);
                 if (is_subclass_of($obj, 'ProtobufMessage') && $k == 'values') {
-                    $r = new ReflectionClass($obj);
+                    $r = new \ReflectionClass($obj);
                     $constants = $r->getConstants();
                     $newVar = [];
                     foreach ($constants as $ckey => $cval) {
@@ -104,7 +89,7 @@ function niceVarDump($obj, $ident = 0)
 
     return $data;
 }
-class SessionCipherTest extends PHPUnit_Framework_TestCase
+class SessionCipherTest extends \PHPUnit_Framework_TestCase
 {
     public function test_basicSessionV2()
     {

@@ -1,11 +1,11 @@
 <?php
 
-require_once __DIR__.'/../state/AxolotlStore.php';
-require_once __DIR__.'/inmemoryidentitykeystore.php';
-require_once __DIR__.'/inmemoryprekeystore.php';
-require_once __DIR__.'/inmemorysessionstore.php';
-require_once __DIR__.'/inmemorysignedprekeystore.php';
-class inmemoryaxolotlstore extends AxolotlStore
+namespace LibAxolotl\Tests;
+
+use LibAxolotl\State\AxolotlStore;
+use LibAxolotl\IdentityKey;
+
+class InMemoryAxolotlStore extends AxolotlStore
 {
     protected $identityKeyStore;
     protected $preKeyStore;
@@ -30,12 +30,12 @@ class inmemoryaxolotlstore extends AxolotlStore
         return $this->identityKeyStore->getLocalRegistrationId();
     }
 
-    public function saveIdentity($recepientId, $identityKey)
+    public function saveIdentity($recepientId, IdentityKey $identityKey)
     {
         $this->identityKeyStore->saveIdentity($recepientId, $identityKey);
     }
 
-    public function isTrustedIdentity($recepientId, $identityKey)
+    public function isTrustedIdentity($recepientId, IdentityKey $identityKey)
     {
         return $this->identityKeyStore->isTrustedIdentity($recepientId, $identityKey);
     }

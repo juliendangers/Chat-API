@@ -1,5 +1,7 @@
 <?php
 
+namespace LibAxolotl\Logger;
+
 abstract class AxolotlLogger
 {
     const VERBOSE = 2;

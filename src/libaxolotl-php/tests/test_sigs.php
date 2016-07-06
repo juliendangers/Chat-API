@@ -1,9 +1,12 @@
 <?php
 
-require_once __DIR__.'/../ecc/Curve.php';
-require_once __DIR__.'/../util/KeyHelper.php';
+namespace LibAxolotl\Tests;
 
-class Curve25519Test extends PHPUnit_Framework_TestCase
+use LibAxolotl\Ecc\Curve;
+
+use LibAxolotl\Utils\KeyHelper;
+
+class Curve25519Test extends \PHPUnit_Framework_TestCase
 {
     public function test_agreement()
     {

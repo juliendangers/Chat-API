@@ -1,5 +1,18 @@
 <?php
 
+namespace LibAxolotl\State;
+
+use LibAxolotl\IdentityKey;
+use LibAxolotl\Ecc\Curve;
+use LibAxolotl\Ecc\ECKeyPair;
+use LibAxolotl\Ecc\ECPublicKey;
+
+use LibAxolotl\IdentityKeyPair;
+use LibAxolotl\Ratchet\RootKey;
+use LibAxolotl\Ratchet\MessageKeys;
+use LibAxolotl\Ratchet\ChainKey;
+use LibAxolotl\Kdf\HKDF;
+
 class SessionState
 {
     protected $sessionStructure;
@@ -392,13 +405,17 @@ class SessionState
 }
 class UnacknowledgedPreKeyMessageItems
 {
-    public function UnacknowledgedPreKeyMessageItems($preKeyId, $signedPreKeyId, $baseKey)
+    protected $preKeyId;
+    protected $signedPreKeyId;
+    protected $baseKey;
+
+    /**
+     * @param int $preKeyId
+     * @param int $signedPreKeyId
+     * @param ECPublicKey $baseKey
+     */
+    public function UnacknowledgedPreKeyMessageItems($preKeyId, $signedPreKeyId, ECPublicKey $baseKey)
     {
-        /*
-        :type preKeyId: int
-        :type signedPreKeyId: int
-        :type baseKey: ECPublicKey
-        */
         $this->preKeyId = $preKeyId;
         $this->signedPreKeyId = $signedPreKeyId;
         $this->baseKey = $baseKey;

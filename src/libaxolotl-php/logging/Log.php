@@ -1,7 +1,8 @@
 <?php
 
-require_once __DIR__.'/AxolotlLogger.php';
-require_once __DIR__.'/AxolotlLoggerProvider.php';
+namespace LibAxolotl\Logger;
+use \Exception as Exception;
+
 class Log extends AxolotlLogger
 {
     public static function verbose($tag, $msg) // [String tag, String msg]

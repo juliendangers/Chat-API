@@ -1,9 +1,11 @@
 <?php
 
-require_once __DIR__.'/../../groups/state/SenderKeyStore.php';
-require_once __DIR__.'/../../groups/state/SenderKeyRecord.php';
+namespace LibAxolotl\Tests\Groups;
 
-class inmemorysenderkeystore extends SenderKeyStore
+use LibAxolotl\Groups\State\SenderKeyStore;
+use LibAxolotl\Groups\State\SenderKeyRecord;
+
+class InMemorySenderKeyStore extends SenderKeyStore
 {
     protected $store;
 

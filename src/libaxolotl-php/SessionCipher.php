@@ -17,26 +17,39 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-//namespace libaxolotl;
+namespace LibAxolotl;
 
-require_once __DIR__.'/ecc/Curve.php';
-require_once __DIR__.'/ecc/ECKeyPair.php';
-require_once __DIR__.'/ecc/ECPublicKey.php';
-require_once __DIR__.'/protocol/CiphertextMessage.php';
-require_once __DIR__.'/protocol/PreKeyWhisperMessage.php';
-require_once __DIR__.'/protocol/WhisperMessage.php';
-require_once __DIR__.'/ratchet/ChainKey.php';
-require_once __DIR__.'/ratchet/MessageKeys.php';
-require_once __DIR__.'/ratchet/RootKey.php';
-require_once __DIR__.'/state/AxolotlStore.php';
-require_once __DIR__.'/state/IdentityKeyStore.php';
-require_once __DIR__.'/state/PreKeyStore.php';
-require_once __DIR__.'/state/SessionRecord.php';
-require_once __DIR__.'/state/SessionState.php';
-require_once __DIR__.'/state/SessionStore.php';
-require_once __DIR__.'/state/SignedPreKeyStore.php';
-require_once __DIR__.'/util/ByteUtil.php';
-require_once __DIR__.'/util/Pair.php';
+
+use LibAxolotl\Ecc\Curve;
+use LibAxolotl\Ecc\ECPublicKey;
+use LibAxolotl\Ecc\ECKeyPair;
+
+use LibAxolotl\Logger\Log;
+
+use LibAxolotl\Protocol\CiphertextMessage;
+use LibAxolotl\Protocol\WhisperMessage;
+use LibAxolotl\Protocol\PreKeyWhisperMessage;
+
+use LibAxolotl\Ratchet\ChainKey;
+use LibAxolotl\Ratchet\MessageKeys;
+use LibAxolotl\Ratchet\RootKey;
+
+use LibAxolotl\State\AxolotlStore;
+use LibAxolotl\State\IdentityKeyStore;
+use LibAxolotl\State\PreKeyStore;
+use LibAxolotl\State\SessionRecord;
+use LibAxolotl\State\SessionState;
+use LibAxolotl\State\SessionStore;
+use LibAxolotl\State\SignedPreKeyStore;
+
+use LibAxolotl\Utils\ByteUtil;
+use LibAxolotl\Utils\Pair;
+
+use LibAxolotl\Exceptions\NoSessionException;
+use LibAxolotl\Exceptions\InvalidMessageException;
+use LibAxolotl\Exceptions\DuplicateMessageException;
+use \Exception as Exception;
+
 
 //require_once "/state/SessionState/UnacknowledgedPreKeyMessageItems.php";
 class SessionCipher
@@ -98,7 +111,7 @@ class SessionCipher
         return $ciphertextMessage;
     }
 
-    public function decryptMsg($ciphertext)
+    public function decryptMsg(WhisperMessage $ciphertext)
     {
         /*
         :type ciphertext: WhisperMessage
@@ -117,7 +130,7 @@ class SessionCipher
         return $plaintext;
     }
 
-    public function decryptPkmsg($ciphertext)
+    public function decryptPkmsg(PreKeyWhisperMessage $ciphertext)
     {
         /*
         :type ciphertext: PreKeyWhisperMessage

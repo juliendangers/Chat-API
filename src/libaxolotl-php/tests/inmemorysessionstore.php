@@ -1,11 +1,12 @@
 <?php
 
-//from axolotl.state.sessionstore import SessionStore
-//from axolotl.state.sessionrecord import SessionRecord
-require_once __DIR__.'/../state/SessionStore.php';
-require_once __DIR__.'/../state/SessionRecord.php';
+namespace LibAxolotl\Tests;
+
+use LibAxolotl\State\SessionStore;
+use LibAxolotl\State\SessionRecord;
+
 //if someone asks why the separator is __putaidea__ for the key,is because was the first thing i listened around when i was thinking how to implement the tuple in php
-class inmemorysessionstore extends SessionStore
+class InMemorySessionStore extends SessionStore
 {
     protected $sessions;
 

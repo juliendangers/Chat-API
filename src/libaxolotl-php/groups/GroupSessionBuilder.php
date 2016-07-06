@@ -1,20 +1,26 @@
 <?php
 
-require_once __DIR__.'/../ecc/ECKeyPair.php';
-require_once __DIR__.'/state/SenderKeyRecord.php';
-require_once __DIR__.'/state/SenderKeyStore.php';
-require_once __DIR__.'/../protocol/SenderKeyDistributionMessage.php';
+namespace LibAxolotl\Groups;
+
+use LibAxolotl\Groups\State\SenderKeyRecord;
+use LibAxolotl\Groups\State\SenderKeyStore;
+use LibAxolotl\Protocol\SenderKeyDistributionMessage;
+
 class GroupSessionBuilder
 {
+    /**
+     * @var SenderKeyStore $senderKeyStore
+     */
     protected $senderKeyStore;
 
-    public function GroupSessionBuilder($senderKeyStore)
+    public function GroupSessionBuilder(SenderKeyStore $senderKeyStore)
     {
         $this->senderKeyStore = $senderKeyStore;
     }
 
     public function processSender($sender, $senderKeyDistributionMessage)
     {
+        /** @var SenderKeyRecord $senderKeyRecord */
         $senderKeyRecord = $this->senderKeyStore->loadSenderKey($sender);
 
         $senderKeyRecord->addSenderKeyState($senderKeyDistributionMessage->getId(),
@@ -26,6 +32,7 @@ class GroupSessionBuilder
 
     public function process($groupId, $keyId, $iteration, $chainKey, $signatureKey)
     {
+        /** @var SenderKeyRecord $senderKeyRecord */
         $senderKeyRecord = $this->senderKeyStore->loadSenderKey($groupId);
 
         $senderKeyRecord->setSenderKeyState($keyId, $iteration, $chainKey, $signatureKey);

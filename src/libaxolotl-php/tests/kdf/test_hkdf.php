@@ -1,7 +1,10 @@
 <?php
 
-require_once __DIR__.'/../../kdf/HKDF.php';
-class HKDFTest extends PHPUnit_Framework_TestCase
+namespace LibAxolotl\Tests\Kdf;
+
+use LibAxolotl\Kdf\HKDF;
+
+class HKDFTest extends \PHPUnit_Framework_TestCase
 {
     public function testVectorV3()
     {

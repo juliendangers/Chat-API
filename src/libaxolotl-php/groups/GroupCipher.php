@@ -1,13 +1,16 @@
 <?php
 
-require_once __DIR__.'/../InvalidKeyException.php';
-require_once __DIR__.'/../InvalidKeyException.php';
-require_once __DIR__.'/../InvalidMessageException.php';
-require_once __DIR__.'/../DuplicateMessageException.php';
-require_once __DIR__.'/../NoSessionException.php';
-require_once __DIR__.'/state/SenderKeyStore.php';
-require_once __DIR__.'/../protocol/SenderKeyMessage.php';
-require_once __DIR__.'/../SessionCipher.php';
+namespace LibAxolotl\Groups;
+
+use LibAxolotl\Exceptions\InvalidKeyException;
+use LibAxolotl\Exceptions\InvalidKeyIdException;
+use LibAxolotl\Exceptions\InvalidMessageException;
+use LibAxolotl\Exceptions\DuplicateMessageException;
+use LibAxolotl\Exceptions\NoSessionException;
+use \Exception as Exception;
+
+use LibAxolotl\Protocol\SenderKeyMessage;
+use LibAxolotl\AESCipher;
 
 class GroupCipher
 {

@@ -1,14 +1,11 @@
 <?php
 
-require_once __DIR__.'/../InvalidKeyException.php';
-require_once __DIR__.'/../ecc/Curve.php';
-require_once __DIR__.'/../ecc/ECKeyPair.php';
-require_once __DIR__.'/../ecc/ECPublicKey.php';
-require_once __DIR__.'/../kdf/HKDF.php';
-//require_once(__DIR__."/../state/SessionState.php");
-require_once __DIR__.'/../util/ByteUtil.php';
-require_once __DIR__.'/ChainKey.php';
-require_once __DIR__.'/RootKey.php';
+namespace LibAxolotl\Ratchet;
+
+use LibAxolotl\Ecc\Curve;
+use LibAxolotl\Kdf\HKDF;
+use LibAxolotl\Utils\ByteUtil;
+
 class RatchetingSession
 {
     public static function initializeSession($sessionState, $sessionVersion, $parameters)

@@ -1,6 +1,8 @@
 <?php
 
-class InvalidKeyIdException extends Exception
+namespace LibAxolotl\Exceptions;
+
+class InvalidKeyIdException extends \Exception
 {
     public function InvalidKeyIdException($detailMessage) // [String detailMessage]
     {

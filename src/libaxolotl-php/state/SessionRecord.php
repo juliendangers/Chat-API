@@ -1,5 +1,7 @@
 <?php
 
+namespace LibAxolotl\State;
+
 class SessionRecord
 {
     const ARCHIVED_STATES_MAX_LENGTH = 40;

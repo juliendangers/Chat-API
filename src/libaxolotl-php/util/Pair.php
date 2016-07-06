@@ -1,5 +1,7 @@
 <?php
 
+namespace LibAxolotl\Utils;
+
 class Pair
 {
     protected $v1;    // T1

@@ -1,6 +1,6 @@
 <?php
+namespace LibAxolotl\State;
 
-require_once __DIR__.'/../InvalidKeyIdException.php';
 abstract class SignedPreKeyStore
 {
     abstract public function loadSignedPreKey($signedPreKeyId);

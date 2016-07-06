@@ -1,5 +1,7 @@
 <?php
 
+namespace LibAxolotl\Ecc;
+
 class DjbECPublicKey implements ECPublicKey
 {
     protected $publicKey;    // byte[]

@@ -1,5 +1,7 @@
 <?php
 
+namespace LibAxolotl\Groups\State;
+
 abstract class SenderKeyStore
 {
     abstract public function storeSenderKey($senderKeyId, $record);

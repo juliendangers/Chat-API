@@ -1,6 +1,8 @@
 <?php
 
-class LegacyMessageException extends Exception
+namespace LibAxolotl\Exceptions;
+
+class LegacyMessageException extends \Exception
 {
     public function LegacyMessageException($detailMesssage) // [String s]
     {

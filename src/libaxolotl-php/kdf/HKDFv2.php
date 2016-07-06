@@ -1,6 +1,7 @@
 <?php
 
-require_once __DIR__.'/HKDF.php';
+namespace LibAxolotl\Kdf;
+
 class HKDFv2 extends HKDF
 {
     protected function getIterationStartOffset()

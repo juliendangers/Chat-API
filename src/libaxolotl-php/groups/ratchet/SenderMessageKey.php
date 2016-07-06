@@ -1,7 +1,10 @@
 <?php
 
-require_once __DIR__.'/../../kdf/HKDFv3.php';
-require_once __DIR__.'/../../util/ByteUtil.php';
+namespace LibAxolotl\Groups\Ratchet;
+
+use LibAxolotl\Utils\ByteUtil;
+use LibAxolotl\Kdf\HKDFv3;
+
 class SenderMessageKey
 {
     protected $iteration;    // int

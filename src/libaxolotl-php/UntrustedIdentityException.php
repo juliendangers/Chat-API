@@ -1,5 +1,7 @@
 <?php
 
-class UntrustedIdentityException extends Exception
+namespace LibAxolotl\Exceptions;
+
+class UntrustedIdentityException extends \Exception
 {
 }

@@ -1,17 +1,44 @@
 <?php
 
-require_once __DIR__.'/../IdentityKey.php';
-require_once __DIR__.'/../ecc/ECPublicKey.php';
+namespace LibAxolotl\State;
+
+use LibAxolotl\IdentityKey;
+use LibAxolotl\Ecc\ECPublicKey;
+
 class PreKeyBundle
 {
-    protected $registrationId;    // int
-    protected $deviceId;    // int
-    protected $preKeyId;    // int
-    protected $preKeyPublic;    // ECPublicKey
-    protected $signedPreKeyId;    // int
-    protected $signedPreKeyPublic;    // ECPublicKey
-    protected $signedPreKeySignature;    // byte[]
-    protected $identityKey;    // IdentityKey
+    /**
+     * @var int $registrationId
+     */
+    protected $registrationId;
+    /**
+     * @var int $deviceId
+     */
+    protected $deviceId;
+    /**
+     * @var int $preKeyId
+     */
+    protected $preKeyId;
+    /**
+     * @var ECPublicKey $preKeyPublic
+     */
+    protected $preKeyPublic;
+    /**
+     * @var int $signedPreKeyId
+     */
+    protected $signedPreKeyId;
+    /**
+     * @var ECPublicKey $signedPreKeyPublic
+     */
+    protected $signedPreKeyPublic;
+    /**
+     * @var mixed $signedPreKeySignature byte[]
+     */
+    protected $signedPreKeySignature;
+    /**
+     * @var IdentityKey $identityKey
+     */
+    protected $identityKey;
 
     public function PreKeyBundle($registrationId, $deviceId, $preKeyId, $preKeyPublic, $signedPreKeyId, $signedPreKeyPublic, $signedPreKeySignature, $identityKey) // [int registrationId, int deviceId, int preKeyId, ECPublicKey preKeyPublic, int signedPreKeyId, ECPublicKey signedPreKeyPublic, byte[] signedPreKeySignature, IdentityKey identityKey]
     {

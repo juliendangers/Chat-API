@@ -1,6 +1,9 @@
 <?php
 
-require_once __DIR__.'/../util/ByteUtil.php';
+namespace LibAxolotl\Kdf;
+
+use LibAxolotl\Utils\ByteUtil;
+
 class DerivedRootSecrets
 {
     const SIZE = 64;    // int

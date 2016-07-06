@@ -1,15 +1,16 @@
 <?php
 
-require_once __DIR__.'/../../ecc/Curve.php';
-require_once __DIR__.'/../../ratchet/RootKey.php';
-require_once __DIR__.'/../../kdf/HKDF.php';
-require_once __DIR__.'/../../ratchet/ChainKey.php';
-require_once __DIR__.'/../../IdentityKey.php';
-require_once __DIR__.'/../../IdentityKeyPair.php';
-require_once __DIR__.'/../../ratchet/BobAxolotlParameters.php';
-require_once __DIR__.'/../../state/SessionState.php';
-require_once __DIR__.'/../../ratchet/RatchetingSession.php';
-class RatchetingSessionTest extends PHPUnit_Framework_TestCase
+namespace LibAxolotl\Tests\Ratchet;
+
+use LibAxolotl\Ecc\Curve;
+use LibAxolotl\Ecc\ECKeyPair;
+use LibAxolotl\IdentityKey;
+use LibAxolotl\IdentityKeyPair;
+use LibAxolotl\Ratchet\BobAxolotlParameters;
+use LibAxolotl\Ratchet\RatchetingSession;
+use LibAxolotl\State\SessionState;
+
+class RatchetingSessionTest extends \PHPUnit_Framework_TestCase
 {
     public function test_ratchetingSessionAsBob()
     {

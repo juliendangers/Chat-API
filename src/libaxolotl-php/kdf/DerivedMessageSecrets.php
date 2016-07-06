@@ -1,9 +1,9 @@
 <?php
 
-require_once __DIR__.'/../util/ByteUtil.php';
-//require_once("java/text/ParseException.php");
-//require_once("javax/crypto/spec/IvParameterSpec.php");
-//require_once("javax/crypto/spec/SecretKeySpec.php");
+namespace LibAxolotl\Kdf;
+
+use LibAxolotl\Utils\ByteUtil;
+
 class DerivedMessageSecrets
 {
     const SIZE = 80;

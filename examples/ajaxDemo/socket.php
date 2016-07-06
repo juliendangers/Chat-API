@@ -78,7 +78,6 @@ function onGetImage($mynumber, $from, $id, $type, $t, $name, $size, $url, $file,
     session_write_close();
 }
 
-require_once '../../src/whatsprot.class.php';
 $target = @$_POST['target'];
 $username = '************';
 $password = '******************************';

@@ -2,6 +2,7 @@
 
 namespace WhatsApp\ChatApi;
 
+use LibAxolotl\Utils\KeyHelper;
 use WhatsApp\ChatApi\Exceptions\ConnectionException;
 use WhatsApp\ChatApi\Events\WhatsApiEventsManager;
 use WhatsApp\ChatApi\Handlers\MessageHandler;
@@ -9,14 +10,10 @@ use WhatsApp\ChatApi\Handlers\NotificationHandler;
 use WhatsApp\ChatApi\Handlers\IqHandler;
 
 if (extension_loaded('curve25519') && extension_loaded('protobuf')) {
-    require_once 'libaxolotl-php/util/KeyHelper.php';
-    require_once 'libaxolotl-php/ecc/Curve.php';
-    require_once 'libaxolotl-php/state/PreKeyRecord.php';
-    require_once 'libaxolotl-php/state/PreKeyBundle.php';
-    require_once 'libaxolotl-php/SessionBuilder.php';
-    require_once 'libaxolotl-php/SessionCipher.php';
-    require_once 'libaxolotl-php/groups/GroupCipher.php';
-    require_once 'libaxolotl-php/groups/GroupSessionBuilder.php';
+    use LibAxolotl\Ecc\Curve;
+    use LibAxolotl\Protocol\WhisperMessage;
+    use LibAxolotl\SessionCipher;
+    use LibAxolotl\Groups\GroupCipher;
 }
 
 class WhatsProt
@@ -333,7 +330,7 @@ class WhatsProt
 
     public function sendSetPreKeys($new = false)
     {
-        $axolotl = new \KeyHelper();
+        $axolotl = new KeyHelper();
 
         $identityKeyPair = $axolotl->generateIdentityKeyPair();
         $privateKey = $identityKeyPair->getPrivateKey()->serialize();
@@ -1294,7 +1291,7 @@ class WhatsProt
                 }
                 $cipherText = $sessionCipher->encrypt($alteredText);
 
-                if ($cipherText instanceof \WhisperMessage) {
+                if ($cipherText instanceof WhisperMessage) {
                     $type = 'msg';
                 } else {
                     $type = 'pkmsg';
@@ -3023,12 +3020,12 @@ class WhatsProt
     /**
      * @param $number
      *
-     * @return \SessionCipher
+     * @return SessionCipher
      */
     public function getSessionCipher($number)
     {
         if (!isset($this->sessionCiphers[$number])) {
-            $this->sessionCiphers[$number] = new \SessionCipher($this->axolotlStore, $this->axolotlStore, $this->axolotlStore, $this->axolotlStore, $number, 1);
+            $this->sessionCiphers[$number] = new SessionCipher($this->axolotlStore, $this->axolotlStore, $this->axolotlStore, $this->axolotlStore, $number, 1);
         }
 
         return $this->sessionCiphers[$number];
@@ -3037,12 +3034,12 @@ class WhatsProt
     /**
      * @param $groupId
      *
-     * @return \GroupCipher
+     * @return GroupCipher
      */
     public function getGroupCipher($groupId)
     {
         if (!isset($this->groupCiphers[$groupId])) {
-            $this->groupCiphers[$groupId] = new \GroupCipher($this->axolotlStore, $groupId);
+            $this->groupCiphers[$groupId] = new GroupCipher($this->axolotlStore, $groupId);
         }
 
         return $this->groupCiphers[$groupId];

@@ -2,6 +2,8 @@
 
 namespace WhatsApp\ChatApi\Handlers;
 
+use WhatsApp\ChatApi\SenderKeyGroupData;
+use WhatsApp\ChatApi\SenderKeyGroupMessage;
 use WhatsApp\ChatApi\WhatsProt;
 use WhatsApp\ChatApi\ProtocolNode;
 use WhatsApp\ChatApi\Constants;
@@ -11,10 +13,12 @@ use WhatsApp\ChatApi\MediaUrl;
 use WhatsApp\ChatApi\DocumentMessage;
 
 if (extension_loaded('curve25519') && extension_loaded('protobuf')) {
-    require_once __DIR__.'/../libaxolotl-php/protocol/SenderKeyDistributionMessage.php';
-    require_once __DIR__.'/../libaxolotl-php/groups/GroupSessionBuilder.php';
-    require_once __DIR__.'/../pb_wa_messages.php';
-    require_once __DIR__.'/../libaxolotl-php/UntrustedIdentityException.php';
+    use LibAxolotl\Exceptions\UntrustedIdentityException;
+    use LibAxolotl\Groups\GroupSessionBuilder;
+    use LibAxolotl\Kdf\HKDFv3;
+    use LibAxolotl\Protocol\PreKeyWhisperMessage;
+    use LibAxolotl\Protocol\SenderKeyDistributionMessage;
+    use LibAxolotl\Protocol\WhisperMessage;
 }
 
 require_once __DIR__.'/../func.php';
