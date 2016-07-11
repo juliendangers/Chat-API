@@ -2075,17 +2075,17 @@ namespace Textsecure\SenderKeyStateStructure {
     class SenderSigningKey extends \ProtobufMessage
     {
         /* Field index constants */
-        const PUBLIC = 1;
-        const PRIVATE = 2;
+        const PUBLICKEY = 1;
+        const PRIVATEKEY = 2;
 
         /* @var array Field descriptors */
         protected static $fields = array(
-            self::PUBLIC => array(
+            self::PUBLICKEY => array(
                 'name' => 'public',
                 'required' => false,
                 'type' => 7,
             ),
-            self::PRIVATE => array(
+            self::PRIVATEKEY => array(
                 'name' => 'private',
                 'required' => false,
                 'type' => 7,
@@ -2109,8 +2109,8 @@ namespace Textsecure\SenderKeyStateStructure {
          */
         public function reset()
         {
-            $this->values[self::PUBLIC] = null;
-            $this->values[self::PRIVATE] = null;
+            $this->values[self::PUBLICKEY] = null;
+            $this->values[self::PRIVATEKEY] = null;
         }
 
         /**
@@ -2132,7 +2132,7 @@ namespace Textsecure\SenderKeyStateStructure {
          */
         public function setPublic($value)
         {
-            return $this->set(self::PUBLIC, $value);
+            return $this->set(self::PUBLICKEY, $value);
         }
 
         /**
@@ -2142,7 +2142,7 @@ namespace Textsecure\SenderKeyStateStructure {
          */
         public function getPublic()
         {
-            return $this->get(self::PUBLIC);
+            return $this->get(self::PUBLICKEY);
         }
 
         /**
@@ -2154,7 +2154,7 @@ namespace Textsecure\SenderKeyStateStructure {
          */
         public function setPrivate($value)
         {
-            return $this->set(self::PRIVATE, $value);
+            return $this->set(self::PRIVATEKEY, $value);
         }
 
         /**
@@ -2164,7 +2164,7 @@ namespace Textsecure\SenderKeyStateStructure {
          */
         public function getPrivate()
         {
-            return $this->get(self::PRIVATE);
+            return $this->get(self::PRIVATEKEY);
         }
     }
 }
