@@ -17,7 +17,7 @@ class SessionState
 {
     protected $sessionStructure;
 
-    public function SessionState($session = null)
+    public function __construct($session = null)
     {
         if ($session == null) {
             $this->sessionStructure = new Textsecure_SessionStructure();

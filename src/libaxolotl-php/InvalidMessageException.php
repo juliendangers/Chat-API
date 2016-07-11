@@ -4,11 +4,8 @@ namespace LibAxolotl\Exceptions;
 
 class InvalidMessageException extends \Exception
 {
-    public function InvalidMessageException($detailMessage, $throw = null) // [String detailMessage]
+    public function __construct($detailMessage, $code = 0, \Exception $previous = null) // [String detailMessage]
     {
-        $this->message = $detailMessage;
-        if ($throw != null) {
-            $this->previous = $throw;
-        }
+        parent::__construct($detailMessage, $code, $previous);
     }
 }

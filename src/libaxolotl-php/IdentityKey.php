@@ -17,7 +17,7 @@ class IdentityKey
      * @param int $offset
      * @throws Exceptions\InvalidKeyException
      */
-    public function IdentityKey($publicKeyOrBytes, $offset = null)
+    public function __construct($publicKeyOrBytes, $offset = null)
     {
         if ($offset === null) {
             $this->publicKey = $publicKeyOrBytes;

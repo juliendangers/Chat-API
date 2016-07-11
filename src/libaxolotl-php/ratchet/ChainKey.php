@@ -12,7 +12,7 @@ class ChainKey
     protected $key;
     protected $index;
 
-    public function ChainKey($kdf, $key, $index)
+    public function __construct($kdf, $key, $index)
     {
         $this->kdf = $kdf;
         $this->key = $key;

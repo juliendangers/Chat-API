@@ -35,7 +35,7 @@ class AliceAxolotlParameters
      */
     protected $theirRatchetKey;
 
-    public function AliceAxolotlParameters($ourIdentityKey, $ourBaseKey, $theirIdentityKey, $theirSignedPreKey, $theirRatchetKey, $theirOneTimePreKey) // [IdentityKeyPair ourIdentityKey, ECKeyPair ourBaseKey, IdentityKey theirIdentityKey, ECPublicKey theirSignedPreKey, ECPublicKey theirRatchetKey, Optional<ECPublicKey> theirOneTimePreKey]
+    public function __construct($ourIdentityKey, $ourBaseKey, $theirIdentityKey, $theirSignedPreKey, $theirRatchetKey, $theirOneTimePreKey) // [IdentityKeyPair ourIdentityKey, ECKeyPair ourBaseKey, IdentityKey theirIdentityKey, ECPublicKey theirSignedPreKey, ECPublicKey theirRatchetKey, Optional<ECPublicKey> theirOneTimePreKey]
     {
         $this->ourIdentityKey = $ourIdentityKey;
         $this->ourBaseKey = $ourBaseKey;
@@ -94,7 +94,7 @@ class AliceBuilder
     protected $theirRatchetKey;
     protected $theirOneTimePreKey;
 
-    public function AliceBuilder()
+    public function __construct()
     {
         $this->ourIdentityKey = null;
         $this->ourBaseKey = null;

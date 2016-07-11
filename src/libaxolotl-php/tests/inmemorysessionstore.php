@@ -10,7 +10,7 @@ class InMemorySessionStore extends SessionStore
 {
     protected $sessions;
 
-    public function InMemorySessionStore()
+    public function __construct()
     {
         $this->sessions = [];
     }

@@ -14,7 +14,7 @@ class InMemoryIdentityKeyStore extends IdentityKeyStore
     protected $identityKeyPair;
     protected $localRegistrationId;
 
-    public function InMemoryIdentityKeyStore()
+    public function __construct()
     {
         $this->trustedKeys = [];
         $identityKeyPairKeys = Curve::generateKeyPair();

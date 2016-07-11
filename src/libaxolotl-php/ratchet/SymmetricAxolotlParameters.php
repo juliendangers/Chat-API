@@ -36,7 +36,7 @@ class SymmetricAxolotlParameters
      */
     protected $theirIdentityKey;
 
-    public function SymmetricAxolotlParameters($ourBaseKey, $ourRatchetKey, $ourIdentityKey, $theirBaseKey, $theirRatchetKey, $theirIdentityKey) // [ECKeyPair ourBaseKey, ECKeyPair ourRatchetKey, IdentityKeyPair ourIdentityKey, ECPublicKey theirBaseKey, ECPublicKey theirRatchetKey, IdentityKey theirIdentityKey]
+    public function __construct($ourBaseKey, $ourRatchetKey, $ourIdentityKey, $theirBaseKey, $theirRatchetKey, $theirIdentityKey) // [ECKeyPair ourBaseKey, ECKeyPair ourRatchetKey, IdentityKeyPair ourIdentityKey, ECPublicKey theirBaseKey, ECPublicKey theirRatchetKey, IdentityKey theirIdentityKey]
     {
         $this->ourBaseKey = $ourBaseKey;
         $this->ourRatchetKey = $ourRatchetKey;
@@ -97,7 +97,7 @@ class SymmetricBuilder
     protected $theirRatchetKey;    // ECPublicKey
     protected $theirIdentityKey;    // IdentityKey
 
-    public function SymmetricBuilder()
+    public function __construct()
     {
         $this->ourIdentityKey = null;
         $this->ourBaseKey = null;

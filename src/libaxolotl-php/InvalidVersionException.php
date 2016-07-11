@@ -4,8 +4,8 @@ namespace LibAxolotl\Exceptions;
 
 class InvalidVersionException extends \Exception
 {
-    public function InvalidVersionException($detailMessage) // [String detailMessage]
+    public function __construct($detailMessage, $code = 0, \Exception $previous = null) // [String detailMessage]
     {
-        $this->message = $detailMessage;
+        parent::__construct($detailMessage, $code, $previous);
     }
 }

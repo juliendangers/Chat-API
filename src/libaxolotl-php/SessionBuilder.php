@@ -43,7 +43,7 @@ class SessionBuilder
     protected $recipientId;
     protected $deviceId;
 
-    public function SessionBuilder($sessionStore, $preKeyStore, $signedPreKeyStore, $identityKeyStore, $recepientId, $deviceId)
+    public function __construct($sessionStore, $preKeyStore, $signedPreKeyStore, $identityKeyStore, $recepientId, $deviceId)
     {
         $this->sessionStore = $sessionStore;
         $this->preKeyStore = $preKeyStore;

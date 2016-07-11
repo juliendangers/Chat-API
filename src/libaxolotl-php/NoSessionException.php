@@ -4,8 +4,8 @@ namespace LibAxolotl\Exceptions;
 
 class NoSessionException extends \Exception
 {
-    public function NoSessionException($s) // [String s]
+    public function NoSessionException($message, $code = 0, \Exception $previous = null) // [String s]
     {
-        $this->message = $s;
+        parent::__construct($message, $code, $previous);
     }
 }

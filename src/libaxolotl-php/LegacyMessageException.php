@@ -4,8 +4,8 @@ namespace LibAxolotl\Exceptions;
 
 class LegacyMessageException extends \Exception
 {
-    public function LegacyMessageException($detailMesssage) // [String s]
+    public function __construct($detailMessage, $code = 0, \Exception $previous = null) // [String s]
     {
-        $this->message = $detailMesssage;
+        parent::__construct($detailMessage, $code, $previous);
     }
 }

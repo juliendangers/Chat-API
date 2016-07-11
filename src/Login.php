@@ -4,6 +4,8 @@ namespace WhatsApp\ChatApi;
 
 use WhatsApp\ChatApi\Exceptions\LoginFailureException;
 
+require_once 'func.php';
+
 class Login
 {
     protected $phoneNumber;

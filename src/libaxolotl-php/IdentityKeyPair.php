@@ -13,7 +13,7 @@ class IdentityKeyPair
     /** @var ECPrivateKey $privateKey */
     protected $privateKey;
 
-    public function IdentityKeyPair(IdentityKey $publicKey = null, ECPrivateKey $privateKey = null, $serialized = null)
+    public function __construct(IdentityKey $publicKey = null, ECPrivateKey $privateKey = null, $serialized = null)
     {
         if ($serialized == null) {
             $this->publicKey = $publicKey;

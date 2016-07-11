@@ -4,8 +4,8 @@ namespace LibAxolotl\Exceptions;
 
 class InvalidKeyIdException extends \Exception
 {
-    public function InvalidKeyIdException($detailMessage) // [String detailMessage]
+    public function __construct($detailMessage, $code = 0, \Exception $previous = null) // [String detailMessage]
     {
-        $this->message = $detailMessage;
+        parent::__construct($detailMessage, $code, $previous);
     }
 }

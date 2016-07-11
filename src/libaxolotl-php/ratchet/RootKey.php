@@ -10,7 +10,7 @@ class RootKey
     protected $kdf;
     protected $key;
 
-    public function RootKey($kdf, $key)
+    public function __construct($kdf, $key)
     {
         $this->kdf = $kdf;
         $this->key = $key;

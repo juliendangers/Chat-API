@@ -13,7 +13,7 @@ class PreKeyRecord
 {
     protected $structure;    // PreKeyRecordStructure
 
-    public function PreKeyRecord($id = null, ECKeyPair $keyPair = null, $serialized = null) // [int id, ECKeyPair keyPair]
+    public function __construct($id = null, ECKeyPair $keyPair = null, $serialized = null) // [int id, ECKeyPair keyPair]
     {
         $this->structure = new Textsecure_PreKeyRecordStructure();
         if ($serialized == null) {
