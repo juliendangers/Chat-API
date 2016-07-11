@@ -23,7 +23,7 @@
         "classmap": [
             "src/"
         ],
-        "psr-4": {
+        "psr-0": {
             "WhatsApp\\ChatApi\\": "src/",
             "WhatsAppExample\\ChatApi\\": "examples/"
         }
