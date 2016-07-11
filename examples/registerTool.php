@@ -1,5 +1,7 @@
 <?php
 
+namespace WhatsAppExample\ChatApi;
+
 use WhatsApp\ChatApi\Registration;
 
 $debug = true;

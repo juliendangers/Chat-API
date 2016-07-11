@@ -7,6 +7,8 @@
  * examplefunctional.php to actually send and receive messages.
  */
 
+namespace WhatsAppExample\ChatApi;
+
 use WhatsApp\ChatApi\Registration;
 
 /*

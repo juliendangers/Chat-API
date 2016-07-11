@@ -1,5 +1,7 @@
 <?php
 
+namespace WhatsAppExample\ChatApi;
+
 set_time_limit(10);
 
 use WhatsApp\ChatApi\WhatsProt;

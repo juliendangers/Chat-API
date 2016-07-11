@@ -1,5 +1,7 @@
 <?php
 
+namespace WhatsAppExample\ChatApi\Ajax;
+
 use WhatsApp\ChatApi\WhatsProt;
 
 set_time_limit(60); //1 minute

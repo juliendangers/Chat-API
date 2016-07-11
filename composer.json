@@ -22,7 +22,11 @@
     "autoload": {
         "classmap": [
             "src/"
-        ]
+        ],
+        "psr-4": {
+            "WhatsApp\\ChatApi\\": "src/",
+            "WhatsAppExample\\ChatApi\\": "examples/"
+        }
     },
     "require": {
         "php": ">=5.6",

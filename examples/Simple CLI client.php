@@ -4,6 +4,8 @@
  * Github: https://github.com/mgp25  *
  *************************************/
 
+namespace WhatsAppExample\ChatApi;
+
 use WhatsApp\ChatApi\WhatsProt;
 use WhatsApp\ChatApi\ProtocolNode;
 use WhatsApp\ChatApi\NewMsgBindInterface;

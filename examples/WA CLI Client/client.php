@@ -4,6 +4,8 @@
  * Github: https://github.com/mgp25  *
  *************************************/
 
+namespace WhatsAppExample\ChatApi\Client;
+
 use WhatsApp\ChatApi\WhatsProt;
 use WhatsApp\ChatApi\NewMsgBindInterface;
 use WhatsApp\ChatApi\Events\MyEvents;
