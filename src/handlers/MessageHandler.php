@@ -12,14 +12,12 @@ use WhatsApp\ChatApi\Location;
 use WhatsApp\ChatApi\MediaUrl;
 use WhatsApp\ChatApi\DocumentMessage;
 
-if (extension_loaded('curve25519') && extension_loaded('protobuf')) {
-    use LibAxolotl\Exceptions\UntrustedIdentityException;
-    use LibAxolotl\Groups\GroupSessionBuilder;
-    use LibAxolotl\Kdf\HKDFv3;
-    use LibAxolotl\Protocol\PreKeyWhisperMessage;
-    use LibAxolotl\Protocol\SenderKeyDistributionMessage;
-    use LibAxolotl\Protocol\WhisperMessage;
-}
+use LibAxolotl\Exceptions\UntrustedIdentityException;
+use LibAxolotl\Groups\GroupSessionBuilder;
+use LibAxolotl\Kdf\HKDFv3;
+use LibAxolotl\Protocol\PreKeyWhisperMessage;
+use LibAxolotl\Protocol\SenderKeyDistributionMessage;
+use LibAxolotl\Protocol\WhisperMessage;
 
 require_once __DIR__.'/../func.php';
 

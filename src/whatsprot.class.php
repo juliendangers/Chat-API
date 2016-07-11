@@ -9,12 +9,10 @@ use WhatsApp\ChatApi\Handlers\MessageHandler;
 use WhatsApp\ChatApi\Handlers\NotificationHandler;
 use WhatsApp\ChatApi\Handlers\IqHandler;
 
-if (extension_loaded('curve25519') && extension_loaded('protobuf')) {
-    use LibAxolotl\Ecc\Curve;
-    use LibAxolotl\Protocol\WhisperMessage;
-    use LibAxolotl\SessionCipher;
-    use LibAxolotl\Groups\GroupCipher;
-}
+use LibAxolotl\Ecc\Curve;
+use LibAxolotl\Protocol\WhisperMessage;
+use LibAxolotl\SessionCipher;
+use LibAxolotl\Groups\GroupCipher;
 
 class WhatsProt
 {

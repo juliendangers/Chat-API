@@ -2,12 +2,10 @@
 
 namespace WhatsApp\ChatApi\Handlers;
 
-if (extension_loaded('curve25519') && extension_loaded('protobuf')) {
-    use LibAxolotl\Ecc\DjbECPublicKey;
-    use LibAxolotl\IdentityKey;
-    use LibAxolotl\SessionBuilder;
-    use LibAxolotl\State\PreKeyBundle;
-}
+use LibAxolotl\Ecc\DjbECPublicKey;
+use LibAxolotl\IdentityKey;
+use LibAxolotl\SessionBuilder;
+use LibAxolotl\State\PreKeyBundle;
 
 use WhatsApp\ChatApi\WhatsProt;
 use WhatsApp\ChatApi\ProtocolNode;
