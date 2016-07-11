@@ -7,6 +7,8 @@ use LibAxolotl\Ecc\ECKeyPair;
 use LibAxolotl\Ecc\ECPublicKey;
 use LibAxolotl\Ecc\ECPrivateKey;
 
+use Textsecure\SignedPreKeyRecordStructure as TextSecure_SignedPreKeyRecordStructure;
+
 use LibAxolotl\Exceptions\InvalidKeyException;
 use \Exception as Exception;
 

@@ -6,7 +6,7 @@ use LibAxolotl\Ecc\Curve;
 use LibAxolotl\Ecc\ECPublicKey;
 use LibAxolotl\Ecc\ECKeyPair;
 
-use LibAxolotl\Logger\Log;
+use LibAxolotl\Logging\Log;
 
 use LibAxolotl\Protocol\CiphertextMessage;
 use LibAxolotl\Protocol\KeyExchangeMessage;

@@ -2,7 +2,7 @@
 
 namespace LibAxolotl\Groups\State;
 
-use LibAxolotl\State\TextSecure_SenderKeyRecordStructure;
+use Textsecure\SenderKeyRecordStructure as TextSecure_SenderKeyRecordStructure;
 
 use LibAxolotl\Exceptions\InvalidKeyIdException;
 

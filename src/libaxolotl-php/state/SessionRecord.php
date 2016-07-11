@@ -2,6 +2,8 @@
 
 namespace LibAxolotl\State;
 
+use Textsecure\RecordStructure as TextSecure_RecordStructure;
+
 class SessionRecord
 {
     const ARCHIVED_STATES_MAX_LENGTH = 40;

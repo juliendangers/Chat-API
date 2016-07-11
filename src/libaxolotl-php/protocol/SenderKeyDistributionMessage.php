@@ -10,6 +10,7 @@ use LibAxolotl\Ecc\ECPublicKey;
 use LibAxolotl\Exceptions\InvalidMessageException;
 use LibAxolotl\Exceptions\LegacyMessageException;
 use \Exception as Exception;
+use Textsecure\SenderKeyDistributionMessage as Textsecure_SenderKeyDistributionMessage;
 
 class SenderKeyDistributionMessage extends CiphertextMessage
 {

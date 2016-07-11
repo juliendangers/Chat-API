@@ -8,6 +8,8 @@ use LibAxolotl\Ecc\Curve;
 use LibAxolotl\Ecc\ECPublicKey;
 use LibAxolotl\IdentityKey;
 
+use Textsecure\KeyExchangeMessage as Textsecure_KeyExchangeMessage;
+
 use LibAxolotl\Exceptions\InvalidMessageException;
 use LibAxolotl\Exceptions\LegacyMessageException;
 use LibAxolotl\Exceptions\InvalidVersionException;

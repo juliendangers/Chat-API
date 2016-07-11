@@ -6,6 +6,8 @@ use LibAxolotl\Utils\ByteUtil;
 
 use LibAxolotl\Ecc\Curve;
 
+use Textsecure\WhisperMessage as Textsecure_WhisperMessage;
+
 use LibAxolotl\Exceptions\InvalidMessageException;
 use LibAxolotl\Exceptions\LegacyMessageException;
 use \Exception as Exception;

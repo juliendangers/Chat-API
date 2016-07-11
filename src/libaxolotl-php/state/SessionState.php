@@ -13,6 +13,13 @@ use LibAxolotl\Ratchet\MessageKeys;
 use LibAxolotl\Ratchet\ChainKey;
 use LibAxolotl\Kdf\HKDF;
 
+use Textsecure\SessionStructure as TextSecure_SessionStructure;
+use Textsecure\SessionStructure\Chain as Textsecure_SessionStructure_Chain;
+use Textsecure\SessionStructure\Chain\ChainKey as Textsecure_SessionStructure_Chain_ChainKey;
+use Textsecure\SessionStructure\Chain\MessageKey as Textsecure_SessionStructure_Chain_MessageKey;
+use Textsecure\SessionStructure\PendingKeyExchange as Textsecure_SessionStructure_PendingKeyExchange;
+use Textsecure\SessionStructure\PendingPreKey as Textsecure_SessionStructure_PendingPreKey;
+
 class SessionState
 {
     protected $sessionStructure;

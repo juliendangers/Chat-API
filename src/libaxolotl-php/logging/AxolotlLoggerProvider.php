@@ -1,6 +1,6 @@
 <?php
 
-namespace LibAxolotl\Logger;
+namespace LibAxolotl\Logging;
 
 class AxolotlLoggerProvider
 {

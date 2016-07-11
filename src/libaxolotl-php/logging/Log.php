@@ -1,6 +1,6 @@
 <?php
 
-namespace LibAxolotl\Logger;
+namespace LibAxolotl\Logging;
 use \Exception as Exception;
 
 class Log extends AxolotlLogger

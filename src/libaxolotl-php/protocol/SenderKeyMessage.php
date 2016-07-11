@@ -6,6 +6,8 @@ use LibAxolotl\Utils\ByteUtil;
 
 use LibAxolotl\Ecc\Curve;
 
+use Textsecure\SenderKeyMessage as Textsecure_SenderKeyMessage;
+
 use LibAxolotl\Exceptions\InvalidMessageException;
 use LibAxolotl\Exceptions\LegacyMessageException;
 use LibAxolotl\Exceptions\InvalidKeyException;

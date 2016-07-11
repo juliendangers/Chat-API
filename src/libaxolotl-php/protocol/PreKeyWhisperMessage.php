@@ -7,6 +7,8 @@ use LibAxolotl\Utils\ByteUtil;
 use LibAxolotl\Ecc\Curve;
 use LibAxolotl\IdentityKey;
 
+use Textsecure\PreKeyWhisperMessage as Textsecure_PreKeyWhisperMessage;
+
 use LibAxolotl\Exceptions\InvalidMessageException;
 use LibAxolotl\Exceptions\InvalidVersionException;
 use \Exception as Exception;

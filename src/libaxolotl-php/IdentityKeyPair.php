@@ -4,7 +4,8 @@ namespace LibAxolotl;
 
 use LibAxolotl\Ecc\Curve;
 use LibAxolotl\Ecc\ECPrivateKey;
-use LibAxolotl\State\Textsecure_IdentityKeyPairStructure;
+
+use Textsecure\IdentityKeyPairStructure as Textsecure_IdentityKeyPairStructure;
 
 class IdentityKeyPair
 {

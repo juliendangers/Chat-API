@@ -7,10 +7,10 @@ use LibAxolotl\Ecc\Curve;
 use LibAxolotl\Groups\Ratchet\SenderMessageKey;
 use LibAxolotl\Groups\Ratchet\SenderChainKey;
 
-use LibAxolotl\State\Textsecure_SenderKeyStateStructure;
-use LibAxolotl\State\Textsecure_SenderKeyStateStructure_SenderChainKey;
-use LibAxolotl\State\Textsecure_SenderKeyStateStructure_SenderSigningKey;
-use LibAxolotl\State\Textsecure_SenderKeyStateStructure_SenderMessageKey;
+use Textsecure\SenderKeyStateStructure as Textsecure_SenderKeyStateStructure;
+use Textsecure\SenderKeyStateStructure\SenderChainKey as Textsecure_SenderKeyStateStructure_SenderChainKey;
+use Textsecure\SenderKeyStateStructure\SenderSigningKey as Textsecure_SenderKeyStateStructure_SenderSigningKey;
+use Textsecure\SenderKeyStateStructure\SenderMessageKey as Textsecure_SenderKeyStateStructure_SenderMessageKey;
 
 class SenderKeyState
 {

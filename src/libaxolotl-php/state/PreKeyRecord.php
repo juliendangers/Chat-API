@@ -4,6 +4,8 @@ namespace LibAxolotl\State;
 
 use LibAxolotl\Ecc\ECPublicKey;
 
+use Textsecure\PreKeyRecordStructure as TextSecure_PreKeyRecordStructure;
+
 use LibAxolotl\Ecc\Curve;
 use LibAxolotl\Ecc\ECPrivateKey;
 use LibAxolotl\Ecc\ECKeyPair;
@@ -11,6 +13,7 @@ use \Exception as Exception;
 
 class PreKeyRecord
 {
+    /** @var TextSecure_PreKeyRecordStructure $structure */
     protected $structure;    // PreKeyRecordStructure
 
     public function __construct($id = null, ECKeyPair $keyPair = null, $serialized = null) // [int id, ECKeyPair keyPair]
