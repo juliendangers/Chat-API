@@ -289,12 +289,12 @@ class Textsecure_SessionStructure_Chain extends \ProtobufMessage
         self::CHAINKEY => [
             'name'     => 'chainKey',
             'required' => false,
-            'type'     => 'Textsecure_SessionStructure_Chain_ChainKey',
+            'type'     => '\LibAxolotl\State\Textsecure_SessionStructure_Chain_ChainKey',
         ],
         self::MESSAGEKEYS => [
             'name'     => 'messageKeys',
             'repeated' => true,
-            'type'     => 'Textsecure_SessionStructure_Chain_MessageKey',
+            'type'     => '\LibAxolotl\State\Textsecure_SessionStructure_Chain_MessageKey',
         ],
     ];
 
@@ -884,22 +884,22 @@ class Textsecure_SessionStructure extends \ProtobufMessage
         self::SENDERCHAIN => [
             'name'     => 'senderChain',
             'required' => false,
-            'type'     => 'Textsecure_SessionStructure_Chain',
+            'type'     => '\LibAxolotl\State\Textsecure_SessionStructure_Chain',
         ],
         self::RECEIVERCHAINS => [
             'name'     => 'receiverChains',
             'repeated' => true,
-            'type'     => 'Textsecure_SessionStructure_Chain',
+            'type'     => '\LibAxolotl\State\Textsecure_SessionStructure_Chain',
         ],
         self::PENDINGKEYEXCHANGE => [
             'name'     => 'pendingKeyExchange',
             'required' => false,
-            'type'     => 'Textsecure_SessionStructure_PendingKeyExchange',
+            'type'     => '\LibAxolotl\State\Textsecure_SessionStructure_PendingKeyExchange',
         ],
         self::PENDINGPREKEY => [
             'name'     => 'pendingPreKey',
             'required' => false,
-            'type'     => 'Textsecure_SessionStructure_PendingPreKey',
+            'type'     => '\LibAxolotl\State\Textsecure_SessionStructure_PendingPreKey',
         ],
         self::REMOTEREGISTRATIONID => [
             'name'     => 'remoteRegistrationId',
@@ -1313,12 +1313,12 @@ class Textsecure_RecordStructure extends \ProtobufMessage
         self::CURRENTSESSION => [
             'name'     => 'currentSession',
             'required' => false,
-            'type'     => 'Textsecure_SessionStructure',
+            'type'     => '\LibAxolotl\State\Textsecure_SessionStructure',
         ],
         self::PREVIOUSSESSIONS => [
             'name'     => 'previousSessions',
             'repeated' => true,
-            'type'     => 'Textsecure_SessionStructure',
+            'type'     => '\LibAxolotl\State\Textsecure_SessionStructure',
         ],
     ];
 
@@ -2171,17 +2171,17 @@ class Textsecure_SenderKeyStateStructure extends \ProtobufMessage
         self::SENDERCHAINKEY => [
             'name'     => 'senderChainKey',
             'required' => false,
-            'type'     => 'Textsecure_SenderKeyStateStructure_SenderChainKey',
+            'type'     => '\LibAxolotl\State\Textsecure_SenderKeyStateStructure_SenderChainKey',
         ],
         self::SENDERSIGNINGKEY => [
             'name'     => 'senderSigningKey',
             'required' => false,
-            'type'     => 'Textsecure_SenderKeyStateStructure_SenderSigningKey',
+            'type'     => '\LibAxolotl\State\Textsecure_SenderKeyStateStructure_SenderSigningKey',
         ],
         self::SENDERMESSAGEKEYS => [
             'name'     => 'senderMessageKeys',
             'repeated' => true,
-            'type'     => 'Textsecure_SenderKeyStateStructure_SenderMessageKey',
+            'type'     => '\LibAxolotl\State\Textsecure_SenderKeyStateStructure_SenderMessageKey',
         ],
     ];
 
@@ -2362,7 +2362,7 @@ class Textsecure_SenderKeyRecordStructure extends \ProtobufMessage
         self::SENDERKEYSTATES => [
             'name'     => 'senderKeyStates',
             'repeated' => true,
-            'type'     => 'Textsecure_SenderKeyStateStructure',
+            'type'     => '\LibAxolotl\State\Textsecure_SenderKeyStateStructure',
         ],
     ];
 
