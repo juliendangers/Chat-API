@@ -327,7 +327,7 @@ class CryptoCounter
     protected $size;
     protected $val;
 
-    public function CryptoCounter($size = 128, $init_val = 0)
+    public function __construct($size = 128, $init_val = 0)
     {
         $this->val = $init_val;
         if (!in_array($size, [128, 192, 256])) {
@@ -355,7 +355,7 @@ class AESCipher
     protected $version;
     protected $counter;
 
-    public function AESCipher($key, $iv, $version = 3, $counter = null)
+    public function __construct($key, $iv, $version = 3, $counter = null)
     {
         $this->key = $key;
         $this->iv = $iv;

@@ -414,7 +414,7 @@ class UnacknowledgedPreKeyMessageItems
      * @param int $signedPreKeyId
      * @param ECPublicKey $baseKey
      */
-    public function UnacknowledgedPreKeyMessageItems($preKeyId, $signedPreKeyId, ECPublicKey $baseKey)
+    public function __construct($preKeyId, $signedPreKeyId, ECPublicKey $baseKey)
     {
         $this->preKeyId = $preKeyId;
         $this->signedPreKeyId = $signedPreKeyId;
